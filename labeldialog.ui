@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LabelDialog</class>
+ <widget class="QDialog" name="LabelDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1021</width>
+    <height>588</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Ice Microstructure Analyzer - Labeling Mode</string>
+  </property>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>550</y>
+     <width>91</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Back</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="outputTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>420</y>
+     <width>681</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="killProcessButton">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>550</y>
+     <width>114</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Kill process</string>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>681</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="whatsThis">
+    <string>AA</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="Pixel">
+    <attribute name="title">
+     <string>Pixel Labeling</string>
+    </attribute>
+    <widget class="QGroupBox" name="preprocessingGroupBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>7</x>
+       <y>0</y>
+       <width>661</width>
+       <height>281</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Path settings</string>
+     </property>
+     <widget class="QPushButton" name="originalBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>36</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="preprocessedBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>76</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="originalEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="preprocessedEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>80</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="originalLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>43</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Original images:</string>
+      </property>
+      <property name="buddy">
+       <cstring>originalEdit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="preprocessedLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>83</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Preprocessed images:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="pixelLabelsEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>120</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="pixelClassificationEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>160</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pixelLabelsBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>116</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pixelClassificationBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>156</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="pixelLabelsLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>123</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Pixel labels:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="pixelClassificationLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>163</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Classification set:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="pixelRfLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>203</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Random Forest:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="pixelRfEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>200</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pixelRfBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>196</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="pixelProbEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>240</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="pixelProbLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>243</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Probability map:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pixelProbBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>236</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="pixelRfStartButton">
+     <property name="geometry">
+      <rect>
+       <x>567</x>
+       <y>336</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Train RF</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="selectImagesLabel">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>302</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select images:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="imageBrowse">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>296</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Browse</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="imagesSelectedLabel">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>302</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0 image(s) selected</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pixelLabelStartButton">
+     <property name="geometry">
+      <rect>
+       <x>567</x>
+       <y>296</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Label</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="pixelOverwriteCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>340</y>
+       <width>170</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Overwrite, if existing</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="pixelRfNameEdit">
+     <property name="geometry">
+      <rect>
+       <x>168</x>
+       <y>339</y>
+       <width>201</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="pixelRfNameLabel">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>342</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Random Forest name:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="suffixLabel">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>302</y>
+       <width>70</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="suffixCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>300</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Suffix:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="Boundary">
+    <attribute name="title">
+     <string>Boundary Labeling</string>
+    </attribute>
+    <widget class="QGroupBox" name="iceGrainGroupBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>7</x>
+       <y>0</y>
+       <width>661</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Path settings</string>
+     </property>
+     <widget class="QPushButton" name="segmentationBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>36</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="boundaryLabelsBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>76</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="segmentationEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="boundaryLabelsEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>80</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="segmentationLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>43</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Segmentation:</string>
+      </property>
+      <property name="buddy">
+       <cstring>originalEdit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="boundaryLabelsLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>83</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Boundary labels:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="boundaryFeaturesLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>123</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Boundary features:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="boundaryFeaturesEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>120</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="boundaryFeaturesBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>116</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="boundaryClassificationEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>160</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="boundaryClassificationLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>163</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Classification set:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="boundaryRfBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>196</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="boundaryRfEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>200</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="boundaryRfLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>203</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Random Forest:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="boundaryClassificationBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>156</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="selectImagesLabel2">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>262</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select images:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="imageBrowse2">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>256</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Browse</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="imagesSelectedLabel2">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>262</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0 image(s) selected</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="boundaryRfStartButton">
+     <property name="geometry">
+      <rect>
+       <x>567</x>
+       <y>296</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Train RF</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="boundaryLabelStartButton">
+     <property name="geometry">
+      <rect>
+       <x>567</x>
+       <y>256</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Label</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="boundaryOverwriteCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>300</y>
+       <width>170</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Overwrite, if existing</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="boundaryRfNameLabel">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>302</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Random Forest name:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="boundaryRfNameEdit">
+     <property name="geometry">
+      <rect>
+       <x>168</x>
+       <y>299</y>
+       <width>201</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QListWidget" name="selectedImageslistWidget">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>40</y>
+     <width>311</width>
+     <height>501</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="selectedImagesLabel">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>20</y>
+     <width>131</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Selected Images:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="lhidePathsCheckBox">
+   <property name="geometry">
+    <rect>
+     <x>920</x>
+     <y>550</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Hide paths</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

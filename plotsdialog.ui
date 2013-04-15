@@ -1,0 +1,2527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PlotsDialog</class>
+ <widget class="QDialog" name="PlotsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>702</width>
+    <height>588</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Ice Microstructure Analyzer - Special Plots</string>
+  </property>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>550</y>
+     <width>91</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Back</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="outputTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>460</y>
+     <width>681</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="killProcessButton">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>550</y>
+     <width>114</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Kill process</string>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>681</width>
+     <height>441</height>
+    </rect>
+   </property>
+   <property name="whatsThis">
+    <string>AA</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="cloudyBands">
+    <attribute name="title">
+     <string>Cloudy Bands</string>
+    </attribute>
+    <widget class="QGroupBox" name="cloudyBandsGroupBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>7</x>
+       <y>0</y>
+       <width>661</width>
+       <height>361</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Path settings</string>
+     </property>
+     <widget class="QPushButton" name="image100Browse">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>36</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image201Browse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>76</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image100Edit">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>40</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image201Edit">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>80</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image100Label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>43</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 10_x0:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image301Edit">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>120</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image401Edit">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>160</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image301Browse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>116</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image401Browse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>156</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image501Edit">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>200</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image501Browse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>196</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image601Edit">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>240</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image600Label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>243</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Image 60_x0:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image601Browse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>236</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image101Label">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>43</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 10_x1:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image101Browse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>36</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image101Edit">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>40</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image601Label">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>243</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 60_x1:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image200Browse">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>76</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image200Edit">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>80</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image300Browse">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>116</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image300Edit">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>120</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image400Browse">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>156</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image400Edit">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>160</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image500Browse">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>196</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image500Edit">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>200</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="image600Browse">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>236</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="image600Edit">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>240</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image200Label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>83</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 20_x0:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image300Label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>123</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 30_x0:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image400Label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>163</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 40_x0:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image500Label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>203</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 50_x0:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image201Label">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>83</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 20_x1:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image301Label">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>123</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 30_x1:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image401Label">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>163</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 40_x1:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="image501Label">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>203</y>
+        <width>104</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Image 50_x1:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="predictionBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>276</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cloudyPlotsBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>316</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="cloudyPlotsEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>320</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="predictionEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>280</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="predictionLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>283</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Extracted Network:</string>
+      </property>
+      <property name="buddy">
+       <cstring>originalEdit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="cloudyPlotsLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>323</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cloudy Bands plots:</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="cloudyBandsStartButton">
+     <property name="geometry">
+      <rect>
+       <x>567</x>
+       <y>376</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Start</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="suffixLabel">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>382</y>
+       <width>170</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="doubleHistogram">
+    <attribute name="title">
+     <string>Double Histogram</string>
+    </attribute>
+    <widget class="QGroupBox" name="doubleHistogramGroupBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>7</x>
+       <y>0</y>
+       <width>661</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Path settings</string>
+     </property>
+     <widget class="QPushButton" name="profilesBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>36</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>&amp;Browse</string>
+      </property>
+      <property name="shortcut">
+       <string>Alt+B</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="histogramPlotsBrowse">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>76</y>
+        <width>91</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="profilesEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="histogramPlotsEdit">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>80</y>
+        <width>381</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="profilesLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>43</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Depth profiles:</string>
+      </property>
+      <property name="buddy">
+       <cstring>image100Edit</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="histogramPlotsLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>83</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Histogram plots:</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="doubleHistogramStartButton">
+     <property name="geometry">
+      <rect>
+       <x>567</x>
+       <y>176</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Start</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="minBubbleDistanceBox">
+     <property name="geometry">
+      <rect>
+       <x>435</x>
+       <y>177</y>
+       <width>57</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>1000</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>180</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Minimal grain size:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="lowGrainSizeBox">
+     <property name="geometry">
+      <rect>
+       <x>153</x>
+       <y>177</y>
+       <width>64</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>99999</number>
+     </property>
+     <property name="singleStep">
+      <number>100</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>180</y>
+       <width>171</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Minimal bubble distance:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox">
+     <property name="geometry">
+      <rect>
+       <x>108</x>
+       <y>137</y>
+       <width>111</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>186</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>226</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>266</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>304</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>306</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>346</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>386</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>426</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>466</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>506</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>508</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>521</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>546</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>586</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>606</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>656</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>706</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>756</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>806</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>846</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>906</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>956</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1006</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1056</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1105</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1147</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1187</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1227</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1306</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1346</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1375</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1426</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1496</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1546</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1616</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1676</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1766</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1815</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1866</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2106</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2146</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2156</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2204</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2216</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2227</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2235</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2246</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2275</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2283</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2295</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2327</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2336</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2386</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2466</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2506</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2546</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2579</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2580</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2586</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2606</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2646</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2686</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2726</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2766</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2806</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2846</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2926</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3196</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3206</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3214</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3216</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3226</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3237</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3245</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3246</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3249</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3256</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3266</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3276</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3278</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3286</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3293</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3296</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3306</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3307</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3313</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3316</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3326</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3336</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3346</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3356</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3396</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3436</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3451</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3476</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3516</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3556</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3596</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3636</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3676</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3726</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3756</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3796</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3817</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3836</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3849</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3856</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3876</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3906</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3917</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3956</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4006</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4016</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4026</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4077</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4106</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4116</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4126</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4156</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4196</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4236</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4276</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4297</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4299</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4300</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4306</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4316</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4356</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4397</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4441</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4442</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4476</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4514</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4515</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4516</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4517</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4518</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4519</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4520</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4556</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4606</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="comboBox_2">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>137</y>
+       <width>111</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>186</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>226</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>266</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>304</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>306</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>346</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>386</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>426</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>466</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>506</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>508</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>521</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>546</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>586</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>606</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>656</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>706</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>756</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>806</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>846</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>906</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>956</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1006</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1056</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1105</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1147</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1187</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1227</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1306</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1346</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1375</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1426</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1496</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1546</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1616</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1676</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1766</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1815</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1866</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2106</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2146</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2156</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2204</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2216</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2227</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2235</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2246</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2275</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2283</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2295</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2327</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2336</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2386</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2466</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2506</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2546</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2579</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2580</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2586</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2606</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2646</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2686</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2726</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2766</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2806</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2846</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2926</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3196</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3206</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3214</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3216</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3226</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3237</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3245</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3246</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3249</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3256</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3266</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3276</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3278</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3286</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3293</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3296</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3306</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3307</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3313</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3316</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3326</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3336</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3346</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3356</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3396</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3436</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3451</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3476</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3516</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3556</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3596</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3636</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3676</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3726</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3756</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3796</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3817</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3836</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3849</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3856</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3876</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3906</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3917</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3956</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4006</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4016</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4026</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4077</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4106</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4116</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4126</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4156</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4196</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4236</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4276</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4297</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4299</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4300</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4306</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4316</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4356</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4397</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4441</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4442</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4476</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4514</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4515</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4516</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4517</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4518</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4519</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4520</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4556</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>4606</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>18</x>
+       <y>140</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bag nr 1:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>140</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bag nr 2:</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
