@@ -497,6 +497,19 @@
       </size>
      </property>
     </widget>
+    <widget class="QPushButton" name="checkInstallationButton">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>266</y>
+       <width>151</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Check installation</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="stitching">
     <attribute name="title">

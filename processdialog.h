@@ -162,6 +162,9 @@ private slots:
     void updateAvailableProfiles();
     void changeProfileName();
 
+    void write(QByteArray text, bool clear);
+    void checkInstallation();
+
 private:
     QProcess process;
 
@@ -199,6 +202,7 @@ private:
     bool bubblePreprocessingRunning;
     bool correctSegmentationRunning;
     bool correctSegmentationRunning2;
+    int  testNr;
     bool processRunning;
     bool noNewLine;
 

@@ -118,6 +118,7 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(createNewProfileButton, SIGNAL(clicked()), this, SLOT(createNewProfile()));
     connect(deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
     connect(editProfileNameButton, SIGNAL(clicked()), this, SLOT(changeProfileName()));
+    connect(checkInstallationButton, SIGNAL(clicked()), this, SLOT(checkInstallation()));
 
     //Load last settings
     std::fstream profiles_file;
@@ -1517,6 +1518,7 @@ void ProcessDialog::stitchImages()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
+    testNr = 0;
     processRunning=true;
 
     if (fileExists("IceMatch"))
@@ -1551,6 +1553,7 @@ void ProcessDialog::preprocessImage()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("preprocess"))
@@ -1594,6 +1597,7 @@ void ProcessDialog::preprocessImage2()
         bubblePreprocessingRunning=true;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("preprocess"))
@@ -1683,6 +1687,7 @@ void ProcessDialog::segmentImage()
             bubblePreprocessingRunning=false;
             correctSegmentationRunning=false;
             correctSegmentationRunning2=false;
+            testNr = 0;
             processRunning=true;
 
             if (fileExists("cis"))
@@ -1745,6 +1750,7 @@ void ProcessDialog::loadProb()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=true;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (!detachedCheckBox->isChecked())
@@ -1802,6 +1808,7 @@ void ProcessDialog::loadSegm()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=true;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (!detachedCheckBox->isChecked())
@@ -1867,6 +1874,7 @@ void ProcessDialog::corrSegm()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=true;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("SubGB"))
@@ -1938,6 +1946,7 @@ void ProcessDialog::correctNetwork()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2032,6 +2041,7 @@ void ProcessDialog::findSubgrains()
             bubblePreprocessingRunning=false;
             correctSegmentationRunning=false;
             correctSegmentationRunning2=false;
+            testNr = 0;
             processRunning=true;
 
             if (fileExists("IceGrain"))
@@ -2160,6 +2170,7 @@ void ProcessDialog::extractNetwork()
             bubblePreprocessingRunning=false;
             correctSegmentationRunning=false;
             correctSegmentationRunning2=false;
+            testNr = 0;
             processRunning=true;
 
             if (fileExists("IceGrain"))
@@ -2228,6 +2239,7 @@ void ProcessDialog::getParameters()
             bubblePreprocessingRunning=false;
             correctSegmentationRunning=false;
             correctSegmentationRunning2=false;
+            testNr = 0;
             processRunning=true;
 
             if (fileExists("IceGrain"))
@@ -2283,6 +2295,7 @@ void ProcessDialog::depthProfiles()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2351,6 +2364,7 @@ void ProcessDialog::viewGrains()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2411,6 +2425,7 @@ void ProcessDialog::viewBoundaries()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2471,6 +2486,7 @@ void ProcessDialog::viewJunctions()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2533,6 +2549,7 @@ void ProcessDialog::analyzeJunctions()
             bubblePreprocessingRunning=false;
             correctSegmentationRunning=false;
             correctSegmentationRunning2=false;
+            testNr = 0;
             processRunning=true;
 
             if (fileExists("IceGrain"))
@@ -2604,6 +2621,7 @@ void ProcessDialog::grainOverview()
             bubblePreprocessingRunning=false;
             correctSegmentationRunning=false;
             correctSegmentationRunning2=false;
+            testNr = 0;
             processRunning=true;
 
             if (fileExists("IceGrain"))
@@ -2675,6 +2693,7 @@ void ProcessDialog::boundaryOverview()
             bubblePreprocessingRunning=false;
             correctSegmentationRunning=false;
             correctSegmentationRunning2=false;
+            testNr = 0;
             processRunning=true;
 
             if (fileExists("IceGrain"))
@@ -2746,6 +2765,7 @@ void ProcessDialog::localCurvature()
             bubblePreprocessingRunning=false;
             correctSegmentationRunning=false;
             correctSegmentationRunning2=false;
+            testNr = 0;
             processRunning=true;
 
             if (fileExists("IceGrain"))
@@ -2786,6 +2806,7 @@ void ProcessDialog::analyze()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2830,6 +2851,7 @@ void ProcessDialog::plotParam()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2874,6 +2896,7 @@ void ProcessDialog::listParam()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2918,6 +2941,7 @@ void ProcessDialog::plotCorrelation()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2957,6 +2981,7 @@ void ProcessDialog::newProfiles()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
+        testNr = 0;
         processRunning=true;
 
         if (fileExists("IceGrain"))
@@ -2982,7 +3007,7 @@ Process handling
 //Process standard output during runtime
 void ProcessDialog::readProcessStdout()
 {
-    if (noNewLine)//if last output has not ended with new line, assume carriage return
+    if (noNewLine && testNr==0)//if last output has not ended with new line, assume carriage return
     {
         outputTextEdit->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
         outputTextEdit->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
@@ -3045,7 +3070,9 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         processRunning=false;
-        outputTextEdit->append(tr("Process crashed or killed by user."));
+        if (testNr==0) outputTextEdit->append(tr("Process crashed or killed by user."));
+        else outputTextEdit->append(tr("failed"));
+        testNr = 0;
         QTextCursor c =  outputTextEdit->textCursor();
         c.movePosition(QTextCursor::End);
         outputTextEdit->setTextCursor(c);
@@ -3057,7 +3084,9 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         processRunning=false;
-        outputTextEdit->append(tr("Process failed."));
+        if (testNr==0) outputTextEdit->append(tr("Process failed."));
+        else outputTextEdit->append(tr("failed"));
+        testNr = 0;
         QTextCursor c =  outputTextEdit->textCursor();
         c.movePosition(QTextCursor::End);
         outputTextEdit->setTextCursor(c);
@@ -3137,9 +3166,116 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
                 process.start("./processdialog.app/Contents/MacOS/cis", args);
             else process.start("./../CIS/cis", args);
         }
+        else if(testNr > 0)
+        {
+            write("succeeded\n",false);
+            testNr++;
+
+            if(testNr==2)
+            {
+                write("Checking IceView... ",false);
+                if (fileExists("IceView") || fileExists("./processdialog.app/Contents/MacOS/IceView") || fileExists("./../IceView/IceView"))
+                {
+                    if (fileExists("IceView"))
+                       process.start("./IceView -test");
+                    else if (directoryExists("processdialog.app"))
+                        process.start("./processdialog.app/Contents/MacOS/IceView -test");
+                    else process.start("./../IceView/IceView -test");
+                }
+                else
+                {
+                    write("not found\n",false);
+                    processRunning=false;
+                    testNr = 0;
+                }
+            }
+
+            else if(testNr==3)
+            {
+                write("Checking Preprocess... ",false);
+                if (fileExists("preprocess") || fileExists("./processdialog.app/Contents/MacOS/preprocess") || fileExists("./../preprocessing/preprocess"))
+                {
+                    if (fileExists("preprocess"))
+                        process.start("./preprocess -test");
+                    else if (directoryExists("processdialog.app"))
+                        process.start("./processdialog.app/Contents/MacOS/preprocess -test");
+                    else process.start("./../preprocessing/preprocess -test");
+                }
+                else
+                {
+                    write("not found\n",false);
+                    processRunning=false;
+                    testNr = 0;
+                }
+            }
+
+            else if(testNr==4)
+            {
+                write("Checking CIS... ",false);
+                if (fileExists("cis") || fileExists("./processdialog.app/Contents/MacOS/cis") || fileExists("./../CIS/cis"))
+                {
+                    if (fileExists("cis"))
+                        process.start("./cis -test");
+                    else if (directoryExists("processdialog.app"))
+                        process.start("./processdialog.app/Contents/MacOS/cis -test");
+                    else process.start("./../CIS/cis -test");
+                }
+                else
+                {
+                    write("not found\n",false);
+                    processRunning=false;
+                    testNr = 0;
+                }
+            }
+
+            else if(testNr==5)
+            {
+                write("Checking IceGrain... ",false);
+                if (fileExists("IceGrain") || fileExists("./processdialog.app/Contents/MacOS/IceGrain") || fileExists("./../IceGrain/IceGrain"))
+                {
+                    if (fileExists("IceGrain"))
+                        process.start("./IceGrain -test");
+                    else if (directoryExists("processdialog.app"))
+                        process.start("./processdialog.app/Contents/MacOS/IceGrain -test");
+                    else process.start("./../IceGrain/IceGrain -test");
+                }
+                else
+                {
+                    write("not found\n",false);
+                    processRunning=false;
+                    testNr = 0;
+                }
+            }
+
+            else if(testNr==6)
+            {
+                write("Checking SubGB... ",false);
+                if (fileExists("SubGB") || fileExists("./processdialog.app/Contents/MacOS/SubGB") || fileExists("./../SubGB/SubGB"))
+                {
+                    if (fileExists("SubGB"))
+                        process.start("./SubGB -test");
+                    else if (directoryExists("processdialog.app"))
+                        process.start("./processdialog.app/Contents/MacOS/SubGB -test");
+                    else process.start("./../SubGB/SubGB -test");
+                }
+                else
+                {
+                    write("not found\n",false);
+                    processRunning=false;
+                    testNr = 0;
+                }
+            }
+
+            else if(testNr==7)
+            {
+                processRunning=false;
+                testNr = 0;
+            }
+        }
         else
         {
             processRunning=false;
+            testNr = 0;
             outputTextEdit->append(tr("Process succeeded."));
             QTextCursor c =  outputTextEdit->textCursor();
             c.movePosition(QTextCursor::End);
@@ -3158,6 +3294,7 @@ void ProcessDialog::processError(QProcess::ProcessError error)
         stitchingRunning=false;
         correctSegmentationRunning=false;
         processRunning=false;
+        testNr = 0;
         outputTextEdit->append(tr("Process failed to start."));
         QTextCursor c =  outputTextEdit->textCursor();
         c.movePosition(QTextCursor::End);
@@ -3248,6 +3385,10 @@ bool ProcessDialog::directoryExists(const char* pzPath )
     }
     return bExists;
 }
+
+/*************
+Handle profiles
+**************/
 
 bool ProcessDialog::isProfileChanged()
 {
@@ -3607,4 +3748,43 @@ void ProcessDialog::hide_Paths()
         hidePaths = false;
         refreshSelectedImages(tabWidget->currentIndex());
     }
+}
+
+/****************
+Check installation
+*****************/
+
+void ProcessDialog::write(QByteArray newText, bool clear)
+{
+    if(clear) outputTextEdit->setPlainText("");
+    QString text = outputTextEdit->toPlainText() + QString::fromLocal8Bit(newText);
+    outputTextEdit->setPlainText(text);
+    QTextCursor c =  outputTextEdit->textCursor();
+    c.movePosition(QTextCursor::End);
+    outputTextEdit->setTextCursor(c);
+    outputTextEdit->ensureCursorVisible();
+}
+
+//Check executables
+void ProcessDialog::checkInstallation()
+{
+    stitchingRunning = false;
+    correctSegmentationRunning = false;
+    correctSegmentationRunning2 = false;
+    bubblePreprocessingRunning = false;
+
+    write("",true);
+    write("Checking IceMatch... ",false);
+    if (fileExists("IceMatch") || fileExists("./processdialog.app/Contents/MacOS/IceMatch") || fileExists("./../IceMatch/IceMatch"))
+    {
+        testNr = 1;
+        processRunning=true;
+
+        if (fileExists("IceMatch"))
+            process.start("./IceMatch -test");
+        else if (directoryExists("processdialog.app"))
+            process.start("./processdialog.app/Contents/MacOS/IceMatch -test");
+        else process.start("./../IceMatch/IceMatch -test");
+    }
+    else write("not found\n",false);
 }
