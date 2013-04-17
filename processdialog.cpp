@@ -3070,13 +3070,16 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         processRunning=false;
-        if (testNr==0) outputTextEdit->append(tr("Process crashed or killed by user."));
-        else outputTextEdit->append(tr("failed"));
+        if (testNr==0)
+        {
+            outputTextEdit->append(tr("Process crashed or killed by user."));
+            QTextCursor c =  outputTextEdit->textCursor();
+            c.movePosition(QTextCursor::End);
+            outputTextEdit->setTextCursor(c);
+            outputTextEdit->ensureCursorVisible();
+        }
+        else write("failed\n",false);
         testNr = 0;
-        QTextCursor c =  outputTextEdit->textCursor();
-        c.movePosition(QTextCursor::End);
-        outputTextEdit->setTextCursor(c);
-        outputTextEdit->ensureCursorVisible();
     }
     else if (exitCode != 0)
     {
@@ -3084,13 +3087,16 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         processRunning=false;
-        if (testNr==0) outputTextEdit->append(tr("Process failed."));
-        else outputTextEdit->append(tr("failed"));
+        if (testNr==0)
+        {
+            outputTextEdit->append(tr("Process failed."));
+            QTextCursor c =  outputTextEdit->textCursor();
+            c.movePosition(QTextCursor::End);
+            outputTextEdit->setTextCursor(c);
+            outputTextEdit->ensureCursorVisible();
+        }
+        else write("failed\n",false);
         testNr = 0;
-        QTextCursor c =  outputTextEdit->textCursor();
-        c.movePosition(QTextCursor::End);
-        outputTextEdit->setTextCursor(c);
-        outputTextEdit->ensureCursorVisible();
     }
     else
     {
