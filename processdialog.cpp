@@ -468,11 +468,13 @@ void ProcessDialog::loadSettings()
     {
         if (atoi(profiles[Profile::activeProfileIndex].data[75].toLocal8Bit().constData())==0 ) defRfCheckBox->setChecked(false);
         else defRfCheckBox->setChecked(true);
+        use_DefRf();
     }
     if(profiles[Profile::activeProfileIndex].data[76].toStdString().compare(emptystring) != 0)
     {
         if (atoi(profiles[Profile::activeProfileIndex].data[76].toLocal8Bit().constData())==0 ) defRfCheckBox0->setChecked(false);
         else defRfCheckBox0->setChecked(true);
+        use_DefRf0();
     }
 
     checkPathesSet();
@@ -2021,7 +2023,6 @@ void ProcessDialog::findSubgrains()
         predictionSubGBDirectoryName.remove(predictionDirectoryName.size()-1, 1);
         predictionSubGBDirectoryName.append("_subgrains/");
 
-
         QString selectedImages2Names;
         for(int i = 0; i < selectedImages2.size(); i++)
         {
@@ -3157,12 +3158,15 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
         {
             QStringList args;
 
-            if (suffix=="no") args << "-bubbles-gui" << selectedImages << preprocessedDirectoryName << parametersFileName;
+            QString firn = "0";
+            if (!firnBox->isChecked()) firn = "1";
+
+            if (suffix=="no") args << "-bubbles-gui" << selectedImages << preprocessedDirectoryName << parametersFileName << firn;
             else
             {
                 QString newPath = preprocessedDirectoryName;
                 newPath.append(suffix);
-                args << "-bubbles-gui" << selectedImages << newPath << parametersFileName;
+                args << "-bubbles-gui" << selectedImages << newPath << parametersFileName << firn;
             }
 
             bubblePreprocessingRunning=false;
