@@ -32,7 +32,7 @@
 #include "profile.h"
 
 int Profile::numberOfProfiles = 0;
-int Profile::numberOfSettings = 76;
+int Profile::numberOfSettings = 77;
 int Profile::activeProfileIndex = 0;
 Profile Profile::unmodifiedProfile;
 
