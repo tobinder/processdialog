@@ -54,15 +54,17 @@ public:
 
     bool fileExists(const char* filename = "");
     bool directoryExists(const char* pzPath = "");
+    void checkDirEmpty(QString initialName, QString &newDir, QLineEdit &target);
 
     LabelDialog labelDialog;
     PlotsDialog plotsDialog;
 
 private slots:
-
     void loadSettings();
     void loadSettingsLegacy();
     void loadSettingsEmpty();
+    void quit();
+    void saveSettings();
 
     void on_parametersBrowse_clicked();
     void on_thumbsBrowse_clicked();
@@ -125,14 +127,9 @@ private slots:
     void processError(QProcess::ProcessError error);
     void killProcess();
 
-    void quit();
-    void setSuffix();
-
     void use_DefRf();
     void use_DefRf0();
     void hide_Paths();
-
-    bool isProfileChanged();
 
     void updateThumbsDirectoryName();
     void updateMosaicDirectoryName();
@@ -152,7 +149,9 @@ private slots:
     void updateScreenshotsDirectoryName();
     void updateScreenshotsDirectoryName2();
     void updateAnalyzeListFileName();
+    void setSuffix();
 
+    bool isProfileChanged();
     void updateProfileLabel();
     void changeActiveProfile();
     void refreshSelectedImages(int index);
@@ -210,10 +209,8 @@ private:
     bool useDefRf0;
     bool hidePaths;
 
-    void saveSettings(bool complete);
     void disableAll();
     void checkPathesSet();
-    void checkDirEmpty(QString initialName, QString &newDir, QLineEdit &target);
 
     void errorPreprocessed();
     void errorProbMap();

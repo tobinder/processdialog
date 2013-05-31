@@ -53,6 +53,9 @@ public:
     void loadSettings();
     void loadSettingsLegacy();
 
+public slots:
+    void saveSettings();
+
 private slots:
     void on_image100Browse_clicked();
     void on_image200Browse_clicked();
@@ -80,9 +83,6 @@ private slots:
     void processError(QProcess::ProcessError error);
     void killProcess();
 
-    void saveSettings();
-    void setSuffix();
-
     void updateImage100FileName();
     void updateImage200FileName();
     void updateImage300FileName();
@@ -99,6 +99,7 @@ private slots:
     void updateCloudyPlotsDirectoryName();
     void updateProfilesDirectoryName();
     void updateHistogramPlotsDirectoryName();
+    void setSuffix();
 
 private:
     QProcess process;

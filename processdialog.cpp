@@ -126,19 +126,17 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     pathSettings.append("/.processdialog.profiles");
     profiles_file.open(pathSettings.c_str());
 
-
     std::vector<QString> temp_data;
     Profile::numberOfProfiles = 0;
     bool found_active_profile = false;
     char c = '\n';
-    if(profiles_file != NULL)
+    if(profiles_file != NULL)//profiles file exists
     {
         std::string line;
         std::string active_profile;        
 
-        std::vector<int> line_pos;        //Beginning lines of the profile
+        std::vector<int> line_pos;           //Beginning line of the profiles
         std::vector<std::string> strProfiles;//Names of the profiles
-        //int Profile::numberOfProfiles = 0;
         std::string emptystring = "";
 
         //Load data from profiles file
@@ -146,26 +144,23 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
         {
             if(line.empty()) temp_data.push_back(QString::fromStdString(emptystring));
             else temp_data.push_back(QString::fromStdString(line));
-            //std::cout << "Adding '" << line << "' " << std::endl;
-            //temp_data.push_back(QString::fromStdString(line));
         }
 
         //Scan for profiles
-        //std::cout << "Loaded " << temp_data.size() << " lines" << std::endl;
         for(unsigned int i = 0; i < temp_data.size(); i++)
         {
             std::string data_i = temp_data[i].toStdString();
-            if(data_i.compare(0,1,"[") == 0)
+            if(data_i.compare(0,1,"[") == 0)//active profile
             {
                 if(found_active_profile)
                 {
-                    //std::cout << "Warning: more than one active profile found. Using the first found profile as active profile." << std::endl;
+                    //more than one active profile found. Using the first found profile as active profile
                     std::string data_i_tmp = data_i;
                     data_i_tmp.resize(data_i_tmp.size()-1);
                     data_i_tmp = data_i_tmp.substr(1,data_i_tmp.size());
-                    //profiles.push_back(data_i_tmp);
                     Profile tmpProfile(QString::fromStdString(data_i_tmp));
                     tmpProfile.index = Profile::numberOfProfiles;
+
                     profiles.push_back(tmpProfile);
                     line_pos.push_back(i);
                     Profile::numberOfProfiles++;
@@ -175,7 +170,6 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
                     active_profile = data_i;
                     active_profile.resize(active_profile.size()-1);
                     active_profile = active_profile.substr(1,active_profile.size());
-                    //profiles.push_back(active_profile);
                     Profile tmpProfile(QString::fromStdString(active_profile));
                     tmpProfile.index = Profile::numberOfProfiles;
 
@@ -185,7 +179,7 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
                     Profile::numberOfProfiles++;
                 }
             }
-            else if(data_i.compare(0,1,"]") == 0)
+            else if(data_i.compare(0,1,"]") == 0)//inactive profile
             {
                 std::string data_i_tmp = data_i;
                 data_i_tmp.resize(data_i_tmp.size()-1);
@@ -193,21 +187,14 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
                 Profile tmpProfile(QString::fromStdString(data_i_tmp));
                 tmpProfile.index = Profile::numberOfProfiles;
                 profiles.push_back(tmpProfile);
-                //profiles.push_back(data_i_tmp);
+
                 line_pos.push_back(i);
                 Profile::numberOfProfiles++;
             }
-            //std::cout << i+1 << ": " << data_i << std::endl;
         }
-        if(!found_active_profile)
-        {
-            //active_profile = profiles[0];
-            //std::cout << "Warning: could not find an active profile. Using the first found profile as active profile." << std::endl;
-        }
-        //profileActiveName = QString::fromStdString(active_profile);
+        //if no active profile is found, no action is required as index is set to 0 by default
 
-        //Give information about the found profiles and set up the necessary data structures
-        //std::cout << "Found " << nr_profiles << " profiles: " << std::endl;
+        //set up profile data structures
         for(unsigned int j = 0; j < profiles.size(); j++)
         {
             int line_next = 0;
@@ -215,46 +202,38 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
             else if(j+1 == profiles.size()) line_next = temp_data.size();
             std::string profileName = profiles[j].name.toStdString();
             std::vector<QString> profileData;
-            //std::cout << j+1 << ": " << profileName << " at line " << line_pos[j];
+
             if(profileName.compare(active_profile) == 0)
             {
-                //std::cout << " (active) " << std::endl;
                 Profile::activeProfileIndex = j;
             }
-            else
-            {
-                //std::cout << std::endl;
-            }
+
             for(int k = line_pos[j]; k < line_next; k++)
             {                
                 profileData.push_back(temp_data[k]);
             }
             profiles[j].data = profileData;
-            //profilesData.push_back(profileData);
             profileData.clear();
         }        
 
-        /*for(unsigned int l = 0; l < profiles.size(); l++)
-        {            
-            QString profile_name = QString::fromStdString(profiles[l]);
-            profilesDataNames.push_back(profile_name);
-            profilesDataPositions.push_back(line_pos[l]);
-        } */
-
+        //resize profile data structure if necessary
         for(unsigned int m = 0; m < profiles.size(); m++)
         {
             if(profiles[m].data.size() < Profile::numberOfSettings)
             {
-                for(int n = 0; n <= Profile::numberOfSettings - profiles[m].data.size(); n++) profiles[m].data.push_back("");
+                for(int n = 0; n < Profile::numberOfSettings - profiles[m].data.size(); n++)
+                {
+                    profiles[m].data.push_back("");
+                }
             }
         }
-
                 
         //Load settings belonging to the active profile into the processdialog
         loadSettings();
     }
     else //If there exists no profile file
     {
+        //create an empty "Default" profile
         Profile::activeProfileIndex = 0;
         Profile p("Default");
         std::vector<QString> empty;
@@ -319,21 +298,16 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
                 loadSettingsLegacy();
                 plotsDialog.loadSettingsLegacy();
                 labelDialog.loadSettingsLegacy();
-                //profileData = profilesData[Profile::activeProfileIndex];
 
             }
             else
             {
                 loadSettingsEmpty();
-                //profileData = profilesData[Profile::activeProfileIndex];
             }
         }
         else //No profiles file found and none or not all legacy settings files found
         {
-            std::cout << "No profiles file found. Creating a new one with Default profile and leaving all fields blank." << std::endl;
-
             loadSettingsEmpty();
-            //profileData = profilesData[Profile::activeProfileIndex];
         }
     }
 
@@ -345,21 +319,18 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     for(unsigned int i = 0; i < profiles.size(); i++)
     {
         item = profiles[i].name;
-        //if(item.compare(profileActiveName) == 0) item.append(" (Active)");
         availableProfilesComboBox->addItem(item);
     }
     availableProfilesComboBox->setCurrentIndex(Profile::activeProfileIndex);
-
-    //profileData = profilesData[Profile::activeProfileIndex];
-    //profileDataOrig = profilesData[Profile::activeProfileIndex];
 
     connect(availableProfilesComboBox, SIGNAL(activated(int)/*currentIndexChanged(int)*/), this, SLOT(changeActiveProfile()));  
     updateProfileLabel();
 }
 
-/**********
-Load settings
-***********/
+/*******************************
+Helper function to load settings
+*******************************/
+
 void ProcessDialog::loadSettings()
 {
     std::string emptystring = "";
@@ -463,7 +434,7 @@ void ProcessDialog::loadSettings()
         else thumbsCheckBox->setChecked(false);
     }
     thumbsDirectoryName=profiles[Profile::activeProfileIndex].data[36];
-    thumbsEdit->setText(thumbsDirectoryName);
+    thumbsEdit->setText(thumbsDirectoryName); 
     if(profiles[Profile::activeProfileIndex].data[75].toStdString().compare(emptystring) != 0)
     {
         if (atoi(profiles[Profile::activeProfileIndex].data[75].toLocal8Bit().constData())==0 ) defRfCheckBox->setChecked(false);
@@ -478,13 +449,10 @@ void ProcessDialog::loadSettings()
     }
 
     checkPathesSet();
-    saveSettings(false);
+    saveSettings();
     Profile::unmodifiedProfile = profiles[Profile::activeProfileIndex];
 }
 
-/*********
-Load settings from legacy file
-**********/
 void ProcessDialog::loadSettingsLegacy()
 {
         std::string pathSettings = (QDir::homePath()).toAscii().data();
@@ -620,74 +588,108 @@ void ProcessDialog::loadSettingsLegacy()
         }
 }
 
-/******
-Create empty file and load settings
-******/
 void ProcessDialog::loadSettingsEmpty()
 {
-    //Create profile file with Default profile and settings fields left blank
-    FILE *profiles_file_test;
-    std::string pathSettings = (QDir::homePath()).toAscii().data();
-    pathSettings.append("/.processdialog.profiles");
-    profiles_file_test = fopen(pathSettings.c_str(), "a+");
-
-    //Write Default profile name and empty strings into the file
-    if(profiles_file_test != NULL)
-    {
-        fflush(profiles_file_test);
-        for(int i = 0; i <= Profile::numberOfSettings; i++)
-        {
-            if(i == 0)
-            {
-                fprintf(profiles_file_test, "[Default]\n");
-                fflush(profiles_file_test);
-            }
-            fprintf(profiles_file_test, " \n");
-            fflush(profiles_file_test);
-        }
-        fclose(profiles_file_test);
-    }
+    //Create profile file with Default profile
+    labelDialog.saveSettings();
+    plotsDialog.saveSettings();
+    saveSettings();
 
     //Load settings
     loadSettings();
 }
 
-/*********
-Set pathes
-*********/
-//SaveSettings belonging to ProcessDialog is the only member function to write into a file
-void ProcessDialog::saveSettings(bool complete = false)
+/*********************
+Quit and save settings
+*********************/
+
+void ProcessDialog::quit()
 {
-    //Load up the profiles file
+    saveSettings();
+    bool changed;
+    changed = isProfileChanged();
+    int choice = 0;
+    if(changed)
+    {
+        QMessageBox profileChangedMsgBox;
+        profileChangedMsgBox.setIcon(QMessageBox::Question);
+        profileChangedMsgBox.setWindowTitle("Current profile has been edited");
+        profileChangedMsgBox.setText("The current profile has been edited. Do you want to save the changes before exiting?");
+        profileChangedMsgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        profileChangedMsgBox.setDefaultButton(QMessageBox::Yes);
+
+        int ret = profileChangedMsgBox.exec();
+        switch(ret)
+        {
+            case QMessageBox::Yes:
+            {
+                choice = 1;
+                break;
+            }
+            case QMessageBox::No:
+            {
+                choice = 2;
+                break;
+            }
+            case QMessageBox::Cancel:
+            {
+                choice = 3;
+                break;
+            }
+        }
+
+        profileChangedMsgBox.close();
+
+        if(choice == 1)
+        {
+            reject();
+        }
+        else if(choice == 2)
+        {
+            profiles[Profile::activeProfileIndex] = Profile::unmodifiedProfile;
+            saveSettings();
+            reject();
+        }
+    }
+    else
+    {
+        reject();
+    }
+}
+
+//write setttings to file
+void ProcessDialog::saveSettings()
+{
+    //Load profiles file
     std::string pathSettings = (QDir::homePath()).toAscii().data();
     pathSettings.append("/.processdialog.profiles");
     std::ofstream profiles_file(pathSettings.c_str());    
 
-    if(!complete)
-    {
-        //Value Boxes and stuff
-        profiles[Profile::activeProfileIndex].data[14] = QString::fromStdString(Profile::convertInt(grainStepBox->value()));
-        profiles[Profile::activeProfileIndex].data[15] = QString::fromStdString(Profile::convertInt(minBubbleDistanceBox->value()));
-        profiles[Profile::activeProfileIndex].data[16] = QString::fromStdString(Profile::convertInt(lowGrainSizeBox->value()));
-        profiles[Profile::activeProfileIndex].data[17] = QString::fromStdString(Profile::convertInt(highGrainSizeBox->value()));
-        profiles[Profile::activeProfileIndex].data[18] = QString::fromStdString(Profile::convertInt(grainSizeStepBox->value()));
-        profiles[Profile::activeProfileIndex].data[23] = QString::fromStdString(Profile::convertInt(nrDepthsBox->value()));
-        profiles[Profile::activeProfileIndex].data[28] = QString::fromStdString(Profile::convertInt(paramComboBox1->currentIndex()));
-        profiles[Profile::activeProfileIndex].data[29] = QString::fromStdString(Profile::convertInt(paramSpinBox->value()));
-        profiles[Profile::activeProfileIndex].data[30] = QString::fromStdString(Profile::convertInt(paramComboBox2->currentIndex()));
-        profiles[Profile::activeProfileIndex].data[31] = QString::fromStdString(Profile::convertInt(corrComboBox1->currentIndex()));
-        profiles[Profile::activeProfileIndex].data[32] = QString::fromStdString(Profile::convertInt(corrSpinBox->value()));
-        profiles[Profile::activeProfileIndex].data[33] = QString::fromStdString(Profile::convertInt(corrComboBox2->currentIndex()));
-        profiles[Profile::activeProfileIndex].data[34] = QString::fromStdString(Profile::convertInt(depthBinWidthBox->value()));
-        //profiles[Profile::activeProfileIndex][36] = thumbsEdit->text();
-    }
+    profiles[Profile::activeProfileIndex].data[13] = "0";
+    profiles[Profile::activeProfileIndex].data[14] = QString::fromStdString(Profile::convertInt(grainStepBox->value()));
+    profiles[Profile::activeProfileIndex].data[15] = QString::fromStdString(Profile::convertInt(minBubbleDistanceBox->value()));
+    profiles[Profile::activeProfileIndex].data[16] = QString::fromStdString(Profile::convertInt(lowGrainSizeBox->value()));
+    profiles[Profile::activeProfileIndex].data[17] = QString::fromStdString(Profile::convertInt(highGrainSizeBox->value()));
+    profiles[Profile::activeProfileIndex].data[18] = QString::fromStdString(Profile::convertInt(grainSizeStepBox->value()));
+    if (!suffixCheckBox->isChecked()) profiles[Profile::activeProfileIndex].data[22] = "0";
+    else profiles[Profile::activeProfileIndex].data[22] = "1";
+    profiles[Profile::activeProfileIndex].data[23] = QString::fromStdString(Profile::convertInt(nrDepthsBox->value()));
+    profiles[Profile::activeProfileIndex].data[28] = QString::fromStdString(Profile::convertInt(paramComboBox1->currentIndex()));
+    profiles[Profile::activeProfileIndex].data[29] = QString::fromStdString(Profile::convertInt(paramSpinBox->value()));
+    profiles[Profile::activeProfileIndex].data[30] = QString::fromStdString(Profile::convertInt(paramComboBox2->currentIndex()));
+    profiles[Profile::activeProfileIndex].data[31] = QString::fromStdString(Profile::convertInt(corrComboBox1->currentIndex()));
+    profiles[Profile::activeProfileIndex].data[32] = QString::fromStdString(Profile::convertInt(corrSpinBox->value()));
+    profiles[Profile::activeProfileIndex].data[33] = QString::fromStdString(Profile::convertInt(corrComboBox2->currentIndex()));
+    profiles[Profile::activeProfileIndex].data[34] = QString::fromStdString(Profile::convertInt(depthBinWidthBox->value()));
+    if (!thumbsCheckBox->isChecked()) profiles[Profile::activeProfileIndex].data[35] = "0";
+    else profiles[Profile::activeProfileIndex].data[35] = "0";
 
     //Resize profile if necessary
     for(int a = 0; a < (int)profiles[a].data.size(); a++)
     {
-        if((int)profiles[a].data.size() < Profile::numberOfSettings)
+        if(profiles[a].data.size() < Profile::numberOfSettings)
         {
-            for(int diff = 1; diff < (int)profiles[a].data.size() - 76; diff++)
+            for(int n = 0; n < Profile::numberOfSettings - profiles[a].data.size(); n++)
             {
                 profiles[a].data.push_back("");
             }
@@ -728,49 +730,15 @@ void ProcessDialog::saveSettings(bool complete = false)
                 continue;
             }
             profiles_file << profiles[i].data[j].toAscii().data() << "\n";
-            //std::cout << "Writing '" << profiles[i][j].toStdString() << "'" << std::endl;
         }
     }    
 
     profiles_file.close();    
 }
 
-/**************
-checkDirEmpty: Checks if the QString returned by the 'getOpenFileName' function is empty. If that is the case use the old
-QString as the new directory.
-Variables:
-- initialName: the original directory QString
-- newDir:      the QString returned by 'getOpenFileName'
-- target:      QLineEdit widget that will be overwritten
-***************/
-void ProcessDialog::checkDirEmpty(QString initialName, QString &newDir, QLineEdit &target)
-{
-    if(newDir == "/" || newDir.isEmpty())
-    {
-        if(initialName.compare(QDir::homePath()) == 0)
-        {
-            target.setText("");
-        }
-        else
-        {
-            target.setText(initialName);
-            newDir = initialName;
-        }
-    }
-    else
-    {
-        if(!initialName.isEmpty())
-        {
-            target.setText(newDir);
-            checkPathesSet();
-        }
-        else
-        {
-            target.setText(initialName);
-            checkPathesSet();
-        }
-    }
-}
+/*********
+Set pathes
+*********/
 
 void ProcessDialog::updateThumbsDirectoryName()
 {
@@ -906,67 +874,6 @@ void ProcessDialog::updateScreenshotsDirectoryName2()
     checkPathesSet();
 }
 
-void ProcessDialog::quit()
-{    
-    saveSettings();
-    bool changed;
-    changed = isProfileChanged();
-    int choice = 0;
-    if(changed)
-    {
-        QMessageBox profileChangedMsgBox;
-        profileChangedMsgBox.setIcon(QMessageBox::Question);
-        profileChangedMsgBox.setWindowTitle("Current profile has been edited");
-        profileChangedMsgBox.setText("The current profile has been edited. Do you want to save the changes before exiting?");
-        profileChangedMsgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
-        profileChangedMsgBox.setDefaultButton(QMessageBox::Yes);
-
-        int ret = profileChangedMsgBox.exec();
-        switch(ret)
-        {
-            case QMessageBox::Yes:
-            {
-                choice = 1;
-                break;
-            }
-            case QMessageBox::No:
-            {
-                choice = 2;
-                break;
-            }
-            case QMessageBox::Cancel:
-            {
-                choice = 3;
-                break;
-            }
-        }
-
-        profileChangedMsgBox.close();
-
-        if(choice == 1)
-        {
-            //saveSettings();
-            reject();
-        }
-        else if(choice == 2)
-        {
-            //profiles[Profile::activeProfileIndex].clear();
-            //profiles[Profile::activeProfileIndex] = profileData;
-            profiles[Profile::activeProfileIndex] = Profile::unmodifiedProfile;
-            saveSettings(true);
-            reject();
-        }
-        else if(choice == 3)
-        {
-            //Do nothing
-        }
-    }
-    else
-    {
-        reject();
-    }
-}
-
 void ProcessDialog::setSuffix()
 {
     if (!suffixCheckBox->isChecked())
@@ -975,7 +882,6 @@ void ProcessDialog::setSuffix()
         suffixLabel->setText("");
         suffixLabel_3->setText("");
         suffixLabel_4->setText("Suffix extraction: OFF");
-        profiles[Profile::activeProfileIndex].data[22] = "0";
     }
     else
     {
@@ -988,7 +894,6 @@ void ProcessDialog::setSuffix()
         suffixLabel->setText(text);
         suffixLabel_3->setText(text);
         suffixLabel_4->setText("Suffix extraction: ON");
-        profiles[Profile::activeProfileIndex].data[22] = "1";
     }
 }
 
@@ -3396,6 +3301,36 @@ bool ProcessDialog::directoryExists(const char* pzPath )
     return bExists;
 }
 
+//if QString returned by 'getOpenFileName' is empty, use old QString
+void ProcessDialog::checkDirEmpty(QString initialName, QString &newDir, QLineEdit &target)
+{
+    if(newDir == "/" || newDir.isEmpty())
+    {
+        if(initialName.compare(QDir::homePath()) == 0)
+        {
+            target.setText("");
+        }
+        else
+        {
+            target.setText(initialName);
+            newDir = initialName;
+        }
+    }
+    else
+    {
+        if(!initialName.isEmpty())
+        {
+            target.setText(newDir);
+            checkPathesSet();
+        }
+        else
+        {
+            target.setText(initialName);
+            checkPathesSet();
+        }
+    }
+}
+
 /*************
 Handle profiles
 **************/
@@ -3426,7 +3361,6 @@ void ProcessDialog::changeActiveProfile()
     //Save settings from all profiles
     saveSettings();
 
-   // QString originalDataName = profileActiveName;
     int originalDataIndex = Profile::unmodifiedProfile.index;
 
     bool changed = false;
@@ -3466,7 +3400,7 @@ void ProcessDialog::changeActiveProfile()
 
         if(choice == 1)
         {
-            saveSettings(true);
+            saveSettings();
             Profile::activeProfileIndex = availableProfilesComboBox->currentIndex();
 
             //Assign new active profile index, load settings from new active profile index and update profile label
@@ -3490,13 +3424,7 @@ void ProcessDialog::changeActiveProfile()
             availableProfilesComboBox->setCurrentIndex(originalDataIndex);
         }
     }
-    else if(changed && originalDataIndex == availableProfilesComboBox->currentIndex())
-    {
-        /*loadSettings();
-        plotsDialog.loadSettings();
-        labelDialog.loadSettings();*/
-    }
-    else
+    else if(!changed)
     {
         saveSettings();
         Profile::activeProfileIndex = availableProfilesComboBox->currentIndex();
@@ -3515,87 +3443,6 @@ void ProcessDialog::updateProfileLabel()
     QString activeProfileLabelText = "Profile:     ";
     activeProfileLabelText.append(profiles[Profile::activeProfileIndex].getName());
     activeProfileLabel->setText(activeProfileLabelText);
-}
-
-void ProcessDialog::refreshSelectedImages(int index)
-{
-    QStringList selImages;
-    if(index == 0) //Main tab
-    {
-        selectedImageslistWidget->clear();
-    }
-    if(index == 1) //Stitching tab
-    {
-        selectedImageslistWidget->clear();
-    }
-    if(index == 2) //Preprocessing tab        
-    {
-        selectedImageslistWidget->clear();
-        if(hidePaths)
-        {
-            for(int i = 0; i < selectedImages.size(); i++)
-            {
-                QString tmp = getFilename(selectedImages[i]);
-                selImages << tmp;
-            }
-            selectedImageslistWidget->addItems(selImages);
-        }
-        else
-        {
-            selectedImageslistWidget->addItems(selectedImages);
-        }
-    }
-    if(index == 3) //Segmentation tab
-    {
-        selectedImageslistWidget->clear();
-        if(hidePaths)
-        {
-            for(int i = 0; i < selectedImages1.size(); i++)
-            {
-                QString tmp = getFilename(selectedImages1[i]);
-                selImages << tmp;
-            }
-            selectedImageslistWidget->addItems(selImages);
-        }
-        else
-        {
-            selectedImageslistWidget->addItems(selectedImages1);
-        }
-    }
-    if(index == 4) //Network Extraction tab
-    {
-        selectedImageslistWidget->clear();
-        if(hidePaths)
-        {
-            for(int i = 0; i < selectedImages2.size(); i++)
-            {
-                QString tmp = getFilename(selectedImages2[i]);
-                selImages << tmp;
-            }
-            selectedImageslistWidget->addItems(selImages);
-        }
-        else
-        {
-            selectedImageslistWidget->addItems(selectedImages2);
-        }
-    }
-    if(index == 5) //View tab
-    {
-        selectedImageslistWidget->clear();
-        if(hidePaths)
-        {
-            QString tmp = getFilename(selectedImage3);
-            selectedImageslistWidget->addItem(tmp);
-        }
-        else
-        {
-            selectedImageslistWidget->addItem(selectedImage3);
-        }
-    }
-    if(index == 6) //Analysis tab
-    {
-        selectedImageslistWidget->clear();
-    }
 }
 
 //Creates a new profile using an input and message dialog
@@ -3743,6 +3590,91 @@ void ProcessDialog::changeProfileName()
     {
         QMessageBox::critical(this, tr("Specifiy a name"), tr("You must specifiy a name for the new profile."));
         goto profileEditGiver; //Using the evil goto statement to jump back to the profile name dialog, cannot substitute goto for anything else at the moment. Maybe I will think of a better solution in the future. *Ducks away in cover*
+    }
+}
+
+/**************
+Selected images
+**************/
+
+void ProcessDialog::refreshSelectedImages(int index)
+{
+    QStringList selImages;
+    if(index == 0) //Main tab
+    {
+        selectedImageslistWidget->clear();
+    }
+    if(index == 1) //Stitching tab
+    {
+        selectedImageslistWidget->clear();
+    }
+    if(index == 2) //Preprocessing tab
+    {
+        selectedImageslistWidget->clear();
+        if(hidePaths)
+        {
+            for(int i = 0; i < selectedImages.size(); i++)
+            {
+                QString tmp = getFilename(selectedImages[i]);
+                selImages << tmp;
+            }
+            selectedImageslistWidget->addItems(selImages);
+        }
+        else
+        {
+            selectedImageslistWidget->addItems(selectedImages);
+        }
+    }
+    if(index == 3) //Segmentation tab
+    {
+        selectedImageslistWidget->clear();
+        if(hidePaths)
+        {
+            for(int i = 0; i < selectedImages1.size(); i++)
+            {
+                QString tmp = getFilename(selectedImages1[i]);
+                selImages << tmp;
+            }
+            selectedImageslistWidget->addItems(selImages);
+        }
+        else
+        {
+            selectedImageslistWidget->addItems(selectedImages1);
+        }
+    }
+    if(index == 4) //Network Extraction tab
+    {
+        selectedImageslistWidget->clear();
+        if(hidePaths)
+        {
+            for(int i = 0; i < selectedImages2.size(); i++)
+            {
+                QString tmp = getFilename(selectedImages2[i]);
+                selImages << tmp;
+            }
+            selectedImageslistWidget->addItems(selImages);
+        }
+        else
+        {
+            selectedImageslistWidget->addItems(selectedImages2);
+        }
+    }
+    if(index == 5) //View tab
+    {
+        selectedImageslistWidget->clear();
+        if(hidePaths)
+        {
+            QString tmp = getFilename(selectedImage3);
+            selectedImageslistWidget->addItem(tmp);
+        }
+        else
+        {
+            selectedImageslistWidget->addItem(selectedImage3);
+        }
+    }
+    if(index == 6) //Analysis tab
+    {
+        selectedImageslistWidget->clear();
     }
 }
 

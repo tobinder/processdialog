@@ -258,6 +258,8 @@ void LabelDialog::saveSettings()
     else profiles[Profile::activeProfileIndex].data[43] = "1";
     if(!ui->boundaryOverwriteCheckBox->isChecked()) profiles[Profile::activeProfileIndex].data[49] = "0";
     else profiles[Profile::activeProfileIndex].data[49] = "1";
+    if(!ui->suffixCheckBox->isChecked()) profiles[Profile::activeProfileIndex].data[53] = "0";
+    else profiles[Profile::activeProfileIndex].data[53] = "1";
 
     reject();
 }

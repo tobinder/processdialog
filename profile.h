@@ -39,7 +39,7 @@
   Naturally, new settings will be loaded with empty or default values if settings are loaded from legacy settings files.
   Index Variable
   0     [profile_name]    //Profile Name [profile_name] = active profile, ]profile_name[ = non-active profile
-  1     #processdialog#   //IGNORE***********************************
+  1     #processdialog#
   2     mosaicEdit
   3     relativeEdit
   4     stitchedEdit
@@ -51,7 +51,7 @@
   10    probMapEdit
   11    segmentationEdit
   12    boundaryFeaturesEdit
-  13    0                    //Empty, so I suppose it is free to be used
+  13    0                    //UNUSED
   14    grainStepBox
   15    minBubbleDistance
   16    lowGrainSizeBox
@@ -75,7 +75,7 @@
   34    depthBinWidthBox
   35    thumbsCheckBox
   36    thumbsEdit
-  37    #labeldialog#     //IGNORE***********************************
+  37    #labeldialog#
   38    originalEdit
   39    preprocessedEdit
   40    pixelLabelsEdit
@@ -92,7 +92,7 @@
   51    boundaryRfNameEdit
   52    pixelProbEdit
   53    suffixCheckBox
-  54    #plotsdialog#     //IGNORE***********************************
+  54    #plotsdialog#
   55    image100Edit
   56    image200Edit
   57    image300Edit
@@ -113,8 +113,8 @@
   72    minBubbleDistanceBox
   73    comboBox
   74    comboBox_2
-  75    defRfCheckBox              //NEW
-  76    defRfCheckBox0             //NEW
+  75    defRfCheckBox
+  76    defRfCheckBox0
 */
 
 class Profile
@@ -144,7 +144,6 @@ public:
 
     //Satic methods
     static std::string convertInt(int number);  //Converts an integer into a string using stringstreams
-
 };
 
 #endif // PROFILE_H

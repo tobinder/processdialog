@@ -58,6 +58,9 @@ public:
     void loadSettings();
     void loadSettingsLegacy();
 
+public slots:
+    void saveSettings();
+
 private slots:
     void on_originalBrowse_clicked();
     void on_preprocessedBrowse_clicked();
@@ -86,9 +89,6 @@ private slots:
     void processError(QProcess::ProcessError error);
     void killProcess();
 
-    void saveSettings();
-    void setSuffix();
-
     void updateImageDirectoryName();
     void updatePreprocessedDirectoryName();
     void updatePixelLabelsDirectoryName();
@@ -100,6 +100,7 @@ private slots:
     void updateBoundaryFeaturesDirectoryName();
     void updateBoundaryClassificationDirectoryName();
     void updateBoundaryRfDirectoryName();
+    void setSuffix();
 
     void refreshSelectedImages(int index);
     void lhide_Paths();
