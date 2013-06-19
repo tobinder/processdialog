@@ -69,6 +69,8 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(stitchStartButton, SIGNAL(clicked()), this, SLOT(stitchImages()));
     connect(preprocessStartButton, SIGNAL(clicked()), this, SLOT(preprocessImage()));
     connect(preprocessStartButton2, SIGNAL(clicked()), this, SLOT(preprocessImage2()));
+    connect(thumbsStartButton, SIGNAL(clicked()), this, SLOT(createThumbs()));
+    connect(thumbsStartButton2, SIGNAL(clicked()), this, SLOT(reduceThumbs()));
     connect(cisStartButton, SIGNAL(clicked()), this, SLOT(segmentImage()));
     connect(loadProbButton, SIGNAL(clicked()), this, SLOT(loadProb()));
     connect(loadSegmBotton, SIGNAL(clicked()), this, SLOT(loadSegm()));
@@ -682,7 +684,7 @@ void ProcessDialog::saveSettings()
     profiles[Profile::activeProfileIndex].data[33] = QString::fromStdString(Profile::convertInt(corrComboBox2->currentIndex()));
     profiles[Profile::activeProfileIndex].data[34] = QString::fromStdString(Profile::convertInt(depthBinWidthBox->value()));
     if (!thumbsCheckBox->isChecked()) profiles[Profile::activeProfileIndex].data[35] = "0";
-    else profiles[Profile::activeProfileIndex].data[35] = "0";
+    else profiles[Profile::activeProfileIndex].data[35] = "1";
 
     //Resize profile if necessary
     for(int a = 0; a < (int)profiles[a].data.size(); a++)
@@ -1210,6 +1212,11 @@ void ProcessDialog::checkPathesSet()
         preprocessStartButton->setEnabled(true);
         preprocessStartButton2->setEnabled(true);
     }
+    if (!imageDirectoryName.isEmpty() && !selectedImages.isEmpty() && !thumbsDirectoryName.isEmpty() && !processRunning)
+    {
+        thumbsStartButton->setEnabled(true);
+        thumbsStartButton2->setEnabled(true);
+    }
     if (!imageDirectoryName.isEmpty() && !selectedImages1.isEmpty() && !preprocessedDirectoryName.isEmpty() && !processRunning &&
         !pixelFeaturesDirectoryName.isEmpty() && !probMapDirectoryName.isEmpty() && !segmentationDirectoryName.isEmpty() &&
         !boundaryFeaturesDirectoryName.isEmpty() && !parametersFileName.isEmpty() && (!thumbsCheckBox->isChecked() ||
@@ -1373,6 +1380,8 @@ void ProcessDialog::disableAll()
     stitchStartButton->setEnabled(false);
     preprocessStartButton->setEnabled(false);
     preprocessStartButton2->setEnabled(false);
+    thumbsStartButton->setEnabled(false);
+    thumbsStartButton2->setEnabled(false);
     cisStartButton->setEnabled(false);
     loadProbButton->setEnabled(false);
     loadSegmBotton->setEnabled(false);
@@ -1502,6 +1511,94 @@ void ProcessDialog::preprocessImage2()
         noNewLine=false;
         stitchingRunning=false;
         bubblePreprocessingRunning=true;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        testNr = 0;
+        processRunning=true;
+
+        if (fileExists("preprocess"))
+            process.start("./preprocess", args);
+        else if (directoryExists("processdialog.app"))
+            process.start("./processdialog.app/Contents/MacOS/preprocess", args);
+        else process.start("./../preprocessing/preprocess", args);
+    }
+    else
+    {
+        if (fileExists("preprocess"))
+            process.startDetached("./preprocess", args);
+        else if (directoryExists("processdialog.app"))
+            process.startDetached("./processdialog.app/Contents/MacOS/preprocess", args);
+        else process.startDetached("./../preprocessing/preprocess", args);
+    }
+}
+
+void ProcessDialog::createThumbs()
+{
+    disableAll();
+    outputTextEdit->clear();
+
+    QStringList args;
+    if (suffix=="no") args << "-resize" << selectedImages << thumbsDirectoryName;
+    else
+    {
+        //output folders, create if not existing
+        QString newPath = preprocessedDirectoryName;
+        newPath.append(suffix);
+        args << "-as" << selectedImages << newPath;
+
+        QDir dir(preprocessedDirectoryName);
+        if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
+    }
+
+    if (!detachedCheckBox->isChecked())
+    {
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        testNr = 0;
+        processRunning=true;
+
+        if (fileExists("cis"))
+            process.start("./cis", args);
+        else if (directoryExists("processdialog.app"))
+            process.start("./processdialog.app/Contents/MacOS/cis", args);
+        else process.start("./../CIS/cis", args);
+    }
+    else
+    {
+        if (fileExists("cis"))
+            process.startDetached("./cis", args);
+        else if (directoryExists("processdialog.app"))
+            process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
+        else process.startDetached("./../CIS/cis", args);
+    }
+}
+
+void ProcessDialog::reduceThumbs()
+{
+    disableAll();
+    outputTextEdit->clear();
+
+    QStringList args;
+    if (suffix=="no") args << "-reduce" << selectedImages << thumbsDirectoryName;
+    else
+    {
+        //output folders, create if not existing
+        QString newPath = preprocessedDirectoryName;
+        newPath.append(suffix);
+        args << "-as" << selectedImages << newPath;
+
+        QDir dir(preprocessedDirectoryName);
+        if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
+    }
+
+    if (!detachedCheckBox->isChecked())
+    {
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         testNr = 0;
@@ -3711,9 +3808,9 @@ void ProcessDialog::write(QByteArray newText, bool clear)
 void ProcessDialog::checkInstallation()
 {
     stitchingRunning = false;
+    bubblePreprocessingRunning = false;
     correctSegmentationRunning = false;
     correctSegmentationRunning2 = false;
-    bubblePreprocessingRunning = false;
 
     write("",true);
     write("Checking IceMatch... ",false);

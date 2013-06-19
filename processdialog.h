@@ -82,6 +82,8 @@ private slots:
     void on_imageBrowse_clicked();
     void preprocessImage();
     void preprocessImage2();
+    void createThumbs();
+    void reduceThumbs();
 
     void on_pixelFeaturesBrowse_clicked();
     void on_probMapBrowse_clicked();
