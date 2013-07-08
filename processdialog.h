@@ -163,6 +163,8 @@ private slots:
     void updateAvailableProfiles();
     void changeProfileName();
 
+    void use_originalImage();
+
     void write(QByteArray text, bool clear);
     void checkInstallation();
 
@@ -218,7 +220,9 @@ private:
     void errorProbMap();
     void errorSegmentation();
     void errorPrediction();
-    void errorProfiles();    
+    void errorProfiles();
+
+    bool originalImageExists;
 };
 
 #endif

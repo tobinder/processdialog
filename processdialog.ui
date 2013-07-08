@@ -1544,6 +1544,19 @@
       <string>Subgrains</string>
      </property>
     </widget>
+    <widget class="QCheckBox" name="originalImageExistsCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>260</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Original image exists</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="view">
     <attribute name="title">

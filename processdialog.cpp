@@ -48,10 +48,12 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     thumbsCheckBox->setChecked(false);
     defRfCheckBox ->setChecked(true);
     defRfCheckBox0->setChecked(true);
+    originalImageExistsCheckBox->setChecked(true);
     processRunning=false;
     useDefRf = true;
     useDefRf0 = true;
     hidePaths = false;
+    originalImageExists = true;
 
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(refreshSelectedImages(int)));
 
@@ -63,6 +65,7 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(defRfCheckBox, SIGNAL(clicked()), this, SLOT(use_DefRf()));
     connect(defRfCheckBox0, SIGNAL(clicked()), this, SLOT(use_DefRf0()));
     connect(hideSelectedImagesPathsCheckBox, SIGNAL(clicked()), this, SLOT(hide_Paths()));
+    connect(originalImageExistsCheckBox, SIGNAL(clicked()), this, SLOT(use_originalImage()));
 
     connect(thumbsCheckBox, SIGNAL(clicked()), this, SLOT(updateThumbsDirectoryName()));
     connect(suffixCheckBox, SIGNAL(clicked()), this, SLOT(setSuffix()));
@@ -2092,6 +2095,18 @@ void ProcessDialog::use_DefRf0()
     }
 }
 
+void ProcessDialog::use_originalImage()
+{
+    if(originalImageExistsCheckBox->isChecked())
+    {
+        originalImageExists = true;
+    }
+    else
+    {
+        originalImageExists = false;
+    }
+}
+
 void ProcessDialog::extractNetwork()
 {
     outputTextEdit->clear();
@@ -2163,8 +2178,19 @@ void ProcessDialog::extractNetwork()
             boundaryFeaturesDir.append(boundaryFeaturesDirectoryName);
             boundaryFeaturesDir.append("FALSE");            
         }
+
+        QString useOriginalImage;
+        if(originalImageExists)
+        {
+            useOriginalImage.append("TRUE");
+        }
+        else
+        {
+            useOriginalImage.append("FALSE");
+        }
+
         args << "-predict-gui" << selectedImages2 << segmentationDirectoryName << predictionDirectoryName <<
-            boundaryFeaturesDir << parametersFileName << suffix << thumbs;
+            boundaryFeaturesDir << parametersFileName << suffix << thumbs << useOriginalImage;
 
         if (!detachedCheckBox->isChecked())
         {
