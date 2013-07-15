@@ -1154,7 +1154,7 @@
     <widget class="QPushButton" name="imageBrowse1">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>119</x>
        <y>216</y>
        <width>91</width>
        <height>32</height>
@@ -1180,7 +1180,7 @@
     <widget class="QPushButton" name="loadSegmBotton">
      <property name="geometry">
       <rect>
-       <x>372</x>
+       <x>255</x>
        <y>256</y>
        <width>131</width>
        <height>32</height>
@@ -1193,7 +1193,7 @@
     <widget class="QPushButton" name="loadProbButton">
      <property name="geometry">
       <rect>
-       <x>214</x>
+       <x>119</x>
        <y>256</y>
        <width>131</width>
        <height>32</height>
@@ -1221,12 +1221,12 @@
       <rect>
        <x>18</x>
        <y>262</y>
-       <width>191</width>
+       <width>101</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>After manual manipulation:</string>
+      <string>Extern input:</string>
      </property>
     </widget>
     <widget class="QPushButton" name="corrSegmBotton">
@@ -1240,6 +1240,19 @@
      </property>
      <property name="text">
       <string>Correct segment.</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="loadSegmBotton_2">
+     <property name="geometry">
+      <rect>
+       <x>391</x>
+       <y>256</y>
+       <width>131</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Load seg. h5</string>
      </property>
     </widget>
    </widget>
