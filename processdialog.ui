@@ -1521,7 +1521,7 @@
     <widget class="QCheckBox" name="defRfCheckBox">
      <property name="geometry">
       <rect>
-       <x>370</x>
+       <x>360</x>
        <y>180</y>
        <width>141</width>
        <height>20</height>
@@ -1547,9 +1547,9 @@
     <widget class="QCheckBox" name="originalImageExistsCheckBox">
      <property name="geometry">
       <rect>
-       <x>370</x>
+       <x>360</x>
        <y>260</y>
-       <width>141</width>
+       <width>161</width>
        <height>20</height>
       </rect>
      </property>
