@@ -122,6 +122,7 @@ private slots:
     void plotCorrelation();
     void analyze();
     void newProfiles();
+    void loadSegmHDF5();
 
     void readProcessStdout();
     void readProcessError();

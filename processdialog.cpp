@@ -95,6 +95,7 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(analyzeStartButton_2, SIGNAL(clicked()), this, SLOT(newProfiles()));
     connect(subgrainButton, SIGNAL(clicked()), this, SLOT(findSubgrains()));
     connect(corrSegmBotton, SIGNAL(clicked()), this, SLOT(corrSegm()));
+    connect(loadSegmHDF5Button, SIGNAL(clicked()), this, SLOT(loadSegmHDF5()));
 
     connect(thumbsEdit, SIGNAL(textChanged(QString)), this, SLOT(updateThumbsDirectoryName()));
     connect(mosaicEdit, SIGNAL(textChanged(QString)), this, SLOT(updateMosaicDirectoryName()));
@@ -3029,6 +3030,46 @@ void ProcessDialog::newProfiles()
     }
 }
 
+void ProcessDialog::loadSegmHDF5()
+{
+    outputTextEdit->clear();
+    bool error_segmentation=false;
+
+    if (suffix!="no")
+    {
+        //input folders, error if not existing
+        QString subFolder = segmentationDirectoryName;
+        subFolder.append(suffix.toAscii().data());
+        if (!directoryExists(subFolder.toAscii().data())) error_segmentation=true;
+
+        //output folders, create if not existing
+        QDir dir(boundaryFeaturesDirectoryName);
+        subFolder = boundaryFeaturesDirectoryName;
+        subFolder.append(suffix.toAscii().data());
+        if (!directoryExists(subFolder.toAscii().data())) dir.mkdir(suffix.toAscii().data());
+    }
+
+    if (error_segmentation) errorSegmentation();
+
+    if (!error_segmentation)
+    {
+        QString thumbs;
+        if (!thumbsCheckBox->isChecked()) thumbs = "no";
+        else thumbs = thumbsDirectoryName;
+
+        QStringList args;
+        args << "-boundary-features-gui" << selectedImages1 << segmentationDirectoryName << segmentationDirectoryName <<
+            "pixel-features/" << boundaryFeaturesDirectoryName << parametersFileName << suffix << thumbs;
+
+        correctSegmentationRunning=false;
+        if (fileExists("cis"))
+            process.start("./cis", args);
+        else if (directoryExists("processdialog.app"))
+            process.start("./processdialog.app/Contents/MacOS/cis", args);
+        else process.start("./../CIS/cis", args);
+    }
+}
+
 /***************
 Process handling
 ***************/
@@ -3170,8 +3211,17 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             if (!thumbsCheckBox->isChecked()) thumbs = "no";
             else thumbs = thumbsDirectoryName;
 
+            QString temp = probMapDirectoryName;
+
+            QString arg = probMapDirectoryName + getFilename(selectedImages1.at(0));
+
+            if(!fileExists(arg.toStdString().c_str()))
+            {
+                temp = segmentationDirectoryName;
+            }
+
             QStringList args;
-            args << "-boundary-features-gui" << selectedImages1 << segmentationDirectoryName << probMapDirectoryName <<
+            args << "-boundary-features-gui" << selectedImages1 << segmentationDirectoryName << temp <<
                 "pixel-features/" << boundaryFeaturesDirectoryName << parametersFileName << suffix << thumbs;
 
             correctSegmentationRunning=false;

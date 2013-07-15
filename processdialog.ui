@@ -1242,7 +1242,7 @@
       <string>Correct segment.</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="loadSegmBotton_2">
+    <widget class="QPushButton" name="loadSegmHDF5Button">
      <property name="geometry">
       <rect>
        <x>391</x>
