@@ -48,7 +48,7 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     thumbsCheckBox->setChecked(false);
     defRfCheckBox ->setChecked(true);
     defRfCheckBox0->setChecked(true);
-    originalImageExistsCheckBox->setChecked(true);
+    radioButton_LASM->setChecked(true);
     processRunning=false;
     useDefRf = true;
     useDefRf0 = true;
@@ -65,7 +65,9 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(defRfCheckBox, SIGNAL(clicked()), this, SLOT(use_DefRf()));
     connect(defRfCheckBox0, SIGNAL(clicked()), this, SLOT(use_DefRf0()));
     connect(hideSelectedImagesPathsCheckBox, SIGNAL(clicked()), this, SLOT(hide_Paths()));
-    connect(originalImageExistsCheckBox, SIGNAL(clicked()), this, SLOT(use_originalImage()));
+    connect(radioButton_LASM, SIGNAL(clicked()), this, SLOT(use_originalImage()));
+    connect(radioButton_Binary, SIGNAL(clicked()), this, SLOT(use_originalImage()));
+    connect(radioButton_FA, SIGNAL(clicked()), this, SLOT(use_originalImage()));
 
     connect(thumbsCheckBox, SIGNAL(clicked()), this, SLOT(updateThumbsDirectoryName()));
     connect(suffixCheckBox, SIGNAL(clicked()), this, SLOT(setSuffix()));
@@ -901,6 +903,7 @@ void ProcessDialog::setSuffix()
         suffixLabel_3->setText(text);
         suffixLabel_4->setText("Suffix extraction: ON");
     }
+    checkPathesSet();
 }
 
 //General
@@ -1240,6 +1243,11 @@ void ProcessDialog::checkPathesSet()
     {
         loadSegmBotton->setEnabled(true);
     }
+    if (selectedImages1.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
+        !boundaryFeaturesDirectoryName.isEmpty() && !parametersFileName.isEmpty() && !suffixCheckBox->isChecked())
+    {
+        loadSegmHDF5Button->setEnabled(true);
+    }
     if (!imageDirectoryName.isEmpty() && !selectedImages1.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
         !boundaryFeaturesDirectoryName.isEmpty() && !parametersFileName.isEmpty() && !probMapDirectoryName.isEmpty() &&
         (!thumbsCheckBox->isChecked() || !thumbsDirectoryName.isEmpty()))
@@ -1409,6 +1417,7 @@ void ProcessDialog::disableAll()
     analyzeStartButton_2->setEnabled(false);
     subgrainButton->setEnabled(false);
     corrSegmBotton->setEnabled(false);
+    loadSegmHDF5Button->setEnabled(false);
 }
 
 //Start Labeling
@@ -2098,7 +2107,7 @@ void ProcessDialog::use_DefRf0()
 
 void ProcessDialog::use_originalImage()
 {
-    if(originalImageExistsCheckBox->isChecked())
+    if(radioButton_LASM->isChecked())
     {
         originalImageExists = true;
     }
@@ -3053,15 +3062,25 @@ void ProcessDialog::loadSegmHDF5()
 
     if (!error_segmentation)
     {
-        QString thumbs;
-        if (!thumbsCheckBox->isChecked()) thumbs = "no";
-        else thumbs = thumbsDirectoryName;
+        QString fileName = segmentationDirectoryName;
+        fileName.remove(fileName.size()-7,7); //remove "/cAxes/"
+        fileName = getFilename(fileName);
+        QString image = getPath(segmentationDirectoryName);
+        image.append(fileName);
+        image.append(".png");
 
         QStringList args;
-        args << "-boundary-features-gui" << selectedImages1 << segmentationDirectoryName << segmentationDirectoryName <<
-            "pixel-features/" << boundaryFeaturesDirectoryName << parametersFileName << suffix << thumbs;
+        args << "-boundary-features-gui" << image << segmentationDirectoryName << segmentationDirectoryName <<
+                "pixel-features/" << boundaryFeaturesDirectoryName << parametersFileName << "no" << "no";
 
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        testNr = 0;
+        processRunning=true;
+
         if (fileExists("cis"))
             process.start("./cis", args);
         else if (directoryExists("processdialog.app"))

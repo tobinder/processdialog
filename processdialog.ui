@@ -1252,7 +1252,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Load seg. h5</string>
+      <string>Load FA segm.</string>
      </property>
     </widget>
    </widget>
@@ -1557,17 +1557,46 @@
       <string>Subgrains</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="originalImageExistsCheckBox">
+    <widget class="QRadioButton" name="radioButton_LASM">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>50</x>
        <y>260</y>
-       <width>161</width>
+       <width>151</width>
        <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>Original image exists</string>
+      <string>Gray value image</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Binary">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>260</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Binary image</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_FA">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>260</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>FA seg structures</string>
      </property>
     </widget>
    </widget>
