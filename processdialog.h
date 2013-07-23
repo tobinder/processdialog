@@ -164,7 +164,7 @@ private slots:
     void updateAvailableProfiles();
     void changeProfileName();
 
-    void use_originalImage();
+    void checkPathesSet();
 
     void write(QByteArray text, bool clear);
     void checkInstallation();
@@ -189,6 +189,7 @@ private:
     QString segmentationDirectoryName;
     QString boundaryFeaturesDirectoryName;
     QStringList selectedImages1;
+    QString selectedImageFA;
 
     QString predictionDirectoryName;
     QString plotsDirectoryName;
@@ -215,15 +216,14 @@ private:
     bool hidePaths;
 
     void disableAll();
-    void checkPathesSet();
 
     void errorPreprocessed();
     void errorProbMap();
     void errorSegmentation();
     void errorPrediction();
     void errorProfiles();
-
-    bool originalImageExists;
+    bool get_FA_path();
+    void errorFA();
 };
 
 #endif

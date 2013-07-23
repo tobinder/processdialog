@@ -53,7 +53,6 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     useDefRf = true;
     useDefRf0 = true;
     hidePaths = false;
-    originalImageExists = true;
 
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(refreshSelectedImages(int)));
 
@@ -65,9 +64,9 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(defRfCheckBox, SIGNAL(clicked()), this, SLOT(use_DefRf()));
     connect(defRfCheckBox0, SIGNAL(clicked()), this, SLOT(use_DefRf0()));
     connect(hideSelectedImagesPathsCheckBox, SIGNAL(clicked()), this, SLOT(hide_Paths()));
-    connect(radioButton_LASM, SIGNAL(clicked()), this, SLOT(use_originalImage()));
-    connect(radioButton_Binary, SIGNAL(clicked()), this, SLOT(use_originalImage()));
-    connect(radioButton_FA, SIGNAL(clicked()), this, SLOT(use_originalImage()));
+    connect(radioButton_LASM, SIGNAL(clicked()), this, SLOT(checkPathesSet()));
+    connect(radioButton_Binary, SIGNAL(clicked()), this, SLOT(checkPathesSet()));
+    connect(radioButton_FA, SIGNAL(clicked()), this, SLOT(checkPathesSet()));
 
     connect(thumbsCheckBox, SIGNAL(clicked()), this, SLOT(updateThumbsDirectoryName()));
     connect(suffixCheckBox, SIGNAL(clicked()), this, SLOT(setSuffix()));
@@ -1255,25 +1254,52 @@ void ProcessDialog::checkPathesSet()
         corrSegmBotton->setEnabled(true);
     }
     if (!imageDirectoryName.isEmpty() && !selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
-        !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty())
+        !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
+        !radioButton_FA->isChecked())
     {
         correctNetworkButton->setEnabled(true);
     }
     if (!imageDirectoryName.isEmpty() && !selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
         !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
-        (!thumbsCheckBox->isChecked() || !thumbsDirectoryName.isEmpty()))
+        (!thumbsCheckBox->isChecked() || !thumbsDirectoryName.isEmpty()) && !radioButton_FA->isChecked())
     {
         extractNetworkButton->setEnabled(true);
     }
     if (!imageDirectoryName.isEmpty() && !selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
             !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
-            !profilesDirectoryName.isEmpty())
+            !profilesDirectoryName.isEmpty() && !radioButton_FA->isChecked())
     {
         subgrainButton->setEnabled(true);
     }
     if (!imageDirectoryName.isEmpty() && !selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
         !predictionDirectoryName.isEmpty() && !plotsDirectoryName.isEmpty() && !profilesDirectoryName.isEmpty() &&
-        !boundaryFeaturesDirectoryName.isEmpty() && !parametersFileName.isEmpty())
+        !boundaryFeaturesDirectoryName.isEmpty() && !parametersFileName.isEmpty() && !radioButton_FA->isChecked())
+    {
+        getParametersButton->setEnabled(true);
+    }
+//    if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
+//        !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
+//        radioButton_FA->isChecked() && !suffixCheckBox->isChecked())
+//    {
+//        correctNetworkButton->setEnabled(true);
+//    }
+    if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
+        !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
+        (!thumbsCheckBox->isChecked() || !thumbsDirectoryName.isEmpty()) && radioButton_FA->isChecked() &&
+        !suffixCheckBox->isChecked())
+    {
+        extractNetworkButton->setEnabled(true);
+    }
+//    if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
+//            !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
+//            !profilesDirectoryName.isEmpty() && radioButton_FA->isChecked() && !suffixCheckBox->isChecked())
+//    {
+//        subgrainButton->setEnabled(true);
+//    }
+    if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
+        !predictionDirectoryName.isEmpty() && !plotsDirectoryName.isEmpty() && !profilesDirectoryName.isEmpty() &&
+        !boundaryFeaturesDirectoryName.isEmpty() && !parametersFileName.isEmpty() && radioButton_FA->isChecked() &&
+        !suffixCheckBox->isChecked())
     {
         getParametersButton->setEnabled(true);
     }
@@ -1319,7 +1345,7 @@ void ProcessDialog::errorPreprocessed()
     text.append("Process can not be started. The path ");
     text.append(preprocessedDirectoryName);
     text.append(suffix);
-    text.append( "does not exist. Check suffix setting!\n");
+    text.append( " does not exist. Check suffix setting!\n");
     outputTextEdit->setPlainText(text);
     QTextCursor c =  outputTextEdit->textCursor();
     c.movePosition(QTextCursor::End);
@@ -1333,7 +1359,7 @@ void ProcessDialog::errorProbMap()
     text.append("Process can not be started. The path ");
     text.append(probMapDirectoryName);
     text.append(suffix);
-    text.append( "does not exist. Check suffix setting!\n");
+    text.append( " does not exist. Check suffix setting!\n");
     outputTextEdit->setPlainText(text);
     QTextCursor c =  outputTextEdit->textCursor();
     c.movePosition(QTextCursor::End);
@@ -1347,7 +1373,7 @@ void ProcessDialog::errorSegmentation()
     text.append("Process can not be started. The path ");
     text.append(segmentationDirectoryName);
     text.append(suffix);
-    text.append( "does not exist. Check suffix setting!\n");
+    text.append( " does not exist. Check suffix setting!\n");
     outputTextEdit->setPlainText(text);
     QTextCursor c =  outputTextEdit->textCursor();
     c.movePosition(QTextCursor::End);
@@ -1361,7 +1387,7 @@ void ProcessDialog::errorPrediction()
     text.append("Process can not be started. The path ");
     text.append(predictionDirectoryName);
     text.append(suffix);
-    text.append( "does not exist. Check suffix setting!\n");
+    text.append( " does not exist. Check suffix setting!\n");
     outputTextEdit->setPlainText(text);
     QTextCursor c =  outputTextEdit->textCursor();
     c.movePosition(QTextCursor::End);
@@ -1375,7 +1401,57 @@ void ProcessDialog::errorProfiles()
     text.append("Process can not be started. The path ");
     text.append(profilesDirectoryName);
     text.append(suffix);
-    text.append( "does not exist. Check suffix setting!\n");
+    text.append( " does not exist. Check suffix setting!\n");
+    outputTextEdit->setPlainText(text);
+    QTextCursor c =  outputTextEdit->textCursor();
+    c.movePosition(QTextCursor::End);
+    outputTextEdit->setTextCursor(c);
+    outputTextEdit->ensureCursorVisible();
+}
+
+bool ProcessDialog::get_FA_path()
+{
+    QString fileName = "";
+    QString check1 = segmentationDirectoryName;
+    QString check2 = segmentationDirectoryName;
+
+    if (check1.size()>7)
+    {
+        check1.remove(0,check1.size()-7);
+        check2.append("cAxes/");
+
+        if(check1=="/cAxes/")
+        {
+            fileName = segmentationDirectoryName;
+            fileName.remove(fileName.size()-7,7); //remove "/cAxes/"
+            fileName = getFilename(fileName);
+        }
+        else if(directoryExists(check2.toAscii().data()))
+        {
+            fileName = segmentationDirectoryName;
+            fileName.remove(fileName.size()-1,1); //remove "/"
+            fileName = getFilename(fileName);
+            segmentationDirectoryName.append("cAxes/");
+            segmentationEdit->setText(segmentationDirectoryName);
+        }
+    }
+
+    if (!fileName.isEmpty())
+    {
+        selectedImageFA = segmentationDirectoryName;
+        selectedImageFA.append(fileName);
+        selectedImageFA.append(".png");
+        return false;
+    }
+    else return true;
+}
+
+void ProcessDialog::errorFA()
+{
+    QString text = outputTextEdit->toPlainText();
+    text.append("Process can not be started. The path ");
+    text.append(segmentationDirectoryName);
+    text.append( " cannot be identified as cAxes path!\n");
     outputTextEdit->setPlainText(text);
     QTextCursor c =  outputTextEdit->textCursor();
     c.movePosition(QTextCursor::End);
@@ -1692,7 +1768,6 @@ void ProcessDialog::segmentImage()
             pixelFeaturesDir.append("FALSE");
         }
 
-
         QStringList args;
         args << "-pixel-complete-gui" << preprocessedDirectoryName << pixelFeaturesDir << probMapDirectoryName <<
             segmentationDirectoryName << boundaryFeaturesDirectoryName << selectedImages1 << parametersFileName << suffix << thumbs;
@@ -1815,10 +1890,7 @@ void ProcessDialog::loadSegm()
         disableAll();
 
         QStringList args;
-        QString correctedSegmentationImage = segmentationDirectoryName;
-        if (suffix!="no") correctedSegmentationImage.append(suffix);
-        correctedSegmentationImage.append(getFilename(selectedImages1.at(0)));
-        args << "-ws-manual" << correctedSegmentationImage << segmentationDirectoryName;
+        args << "-ws-manual" << selectedImages1 << segmentationDirectoryName << suffix;
 
         noNewLine=false;
         stitchingRunning=false;
@@ -2047,8 +2119,6 @@ void ProcessDialog::findSubgrains()
 
         args << "-subgrains-gui" << selectedImages2Names << boundaryFeaturesDir << suffix << parametersFileName << imageDirectoryName << segmentationDirectoryName << predictionDirectoryName
              << predictionSubGBDirectoryName << profilesDirectoryName;
-        /*args << "-predict-gui" << selectedImages2 << segmentationDirectoryName << predictionDirectoryName <<
-            boundaryFeaturesDir << parametersFileName << suffix << thumbs;*/
 
         if (!detachedCheckBox->isChecked())
         {
@@ -2105,18 +2175,6 @@ void ProcessDialog::use_DefRf0()
     }
 }
 
-void ProcessDialog::use_originalImage()
-{
-    if(radioButton_LASM->isChecked())
-    {
-        originalImageExists = true;
-    }
-    else
-    {
-        originalImageExists = false;
-    }
-}
-
 void ProcessDialog::extractNetwork()
 {
     outputTextEdit->clear();
@@ -2165,7 +2223,11 @@ void ProcessDialog::extractNetwork()
 
     if (error_segmentation) errorSegmentation();
 
-    if (!error_segmentation)
+    bool error_cAxes=false;
+    if (radioButton_FA->isChecked()) error_cAxes=get_FA_path();
+    if (error_cAxes) errorFA();
+
+    if (!error_segmentation && !error_cAxes)
     {
         disableAll();
 
@@ -2190,17 +2252,25 @@ void ProcessDialog::extractNetwork()
         }
 
         QString useOriginalImage;
-        if(originalImageExists)
+        if(radioButton_LASM->isChecked())
         {
-            useOriginalImage.append("TRUE");
+            useOriginalImage="TRUE";
         }
         else
         {
-            useOriginalImage.append("FALSE");
+            useOriginalImage="FALSE";
         }
 
-        args << "-predict-gui" << selectedImages2 << segmentationDirectoryName << predictionDirectoryName <<
-            boundaryFeaturesDir << parametersFileName << suffix << thumbs << useOriginalImage;
+        if(!radioButton_FA->isChecked())
+        {
+            args << "-predict-gui" << selectedImages2 << segmentationDirectoryName << predictionDirectoryName <<
+                boundaryFeaturesDir << parametersFileName << suffix << thumbs << useOriginalImage;
+        }
+        else
+        {
+            args << "-predict-gui" << selectedImageFA << segmentationDirectoryName << predictionDirectoryName <<
+                boundaryFeaturesDir << parametersFileName << suffix << thumbs << useOriginalImage;
+        }
 
         if (!detachedCheckBox->isChecked())
         {
@@ -2261,15 +2331,29 @@ void ProcessDialog::getParameters()
     if (error_segmentation) errorSegmentation();
     if (error_prediction) errorPrediction();
 
-    if (!error_segmentation && !error_prediction)
+    bool error_cAxes=false;
+    if (radioButton_FA->isChecked()) error_cAxes=get_FA_path();
+    if (error_cAxes) errorFA();
+
+    if (!error_segmentation && !error_prediction && !error_cAxes)
     {
         disableAll();
 
         QStringList args;
-        args << "-statistics-gui" << selectedImages2 << lowGrainSizeBox->text() << highGrainSizeBox->text() <<
-            grainSizeStepBox->text() << minBubbleDistanceBox->text() << grainStepBox->text() <<
-            segmentationDirectoryName << predictionDirectoryName << plotsDirectoryName <<
-            profilesDirectoryName << boundaryFeaturesDirectoryName << parametersFileName << suffix;
+        if(!radioButton_FA->isChecked())
+        {
+            args << "-statistics-gui" << selectedImages2 << lowGrainSizeBox->text() << highGrainSizeBox->text() <<
+                grainSizeStepBox->text() << minBubbleDistanceBox->text() << grainStepBox->text() <<
+                segmentationDirectoryName << predictionDirectoryName << plotsDirectoryName <<
+                profilesDirectoryName << boundaryFeaturesDirectoryName << parametersFileName << suffix;
+        }
+        else
+        {
+            args << "-statistics-gui" << selectedImageFA << lowGrainSizeBox->text() << highGrainSizeBox->text() <<
+                grainSizeStepBox->text() << minBubbleDistanceBox->text() << grainStepBox->text() <<
+                segmentationDirectoryName << predictionDirectoryName << plotsDirectoryName <<
+                profilesDirectoryName << boundaryFeaturesDirectoryName << parametersFileName << suffix;
+        }
 
         if (!detachedCheckBox->isChecked())
         {
@@ -3042,35 +3126,17 @@ void ProcessDialog::newProfiles()
 void ProcessDialog::loadSegmHDF5()
 {
     outputTextEdit->clear();
-    bool error_segmentation=false;
 
-    if (suffix!="no")
+    bool error_cAxes=get_FA_path();
+
+    if (error_cAxes) errorFA();
+
+    if (!error_cAxes)
     {
-        //input folders, error if not existing
-        QString subFolder = segmentationDirectoryName;
-        subFolder.append(suffix.toAscii().data());
-        if (!directoryExists(subFolder.toAscii().data())) error_segmentation=true;
-
-        //output folders, create if not existing
-        QDir dir(boundaryFeaturesDirectoryName);
-        subFolder = boundaryFeaturesDirectoryName;
-        subFolder.append(suffix.toAscii().data());
-        if (!directoryExists(subFolder.toAscii().data())) dir.mkdir(suffix.toAscii().data());
-    }
-
-    if (error_segmentation) errorSegmentation();
-
-    if (!error_segmentation)
-    {
-        QString fileName = segmentationDirectoryName;
-        fileName.remove(fileName.size()-7,7); //remove "/cAxes/"
-        fileName = getFilename(fileName);
-        QString image = getPath(segmentationDirectoryName);
-        image.append(fileName);
-        image.append(".png");
+        disableAll();
 
         QStringList args;
-        args << "-boundary-features-gui" << image << segmentationDirectoryName << segmentationDirectoryName <<
+        args << "-boundary-features-gui" << selectedImageFA << segmentationDirectoryName << segmentationDirectoryName <<
                 "pixel-features/" << boundaryFeaturesDirectoryName << parametersFileName << "no" << "no";
 
         noNewLine=false;
