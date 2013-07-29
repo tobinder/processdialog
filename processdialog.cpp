@@ -755,11 +755,13 @@ Set pathes
 void ProcessDialog::updateElleDataSetFileName()
 {
     elleDataSetFileName = elleDataSetEdit->text();
+    checkPathesSet();
 }
 
 void ProcessDialog::updateElleExportDirectoryName()
 {
     elleExportDirectoryName = elleExportEdit->text();
+    checkPathesSet();
 }
 
 void ProcessDialog::updateThumbsDirectoryName()
@@ -966,7 +968,6 @@ void ProcessDialog::on_elleExportBrowse_clicked()
     elleExportDirectoryName.append("/");
 
     checkDirEmpty(initialName, elleExportDirectoryName, *elleExportEdit);
-    setSuffix();
 }
 
 //Stitching
@@ -1377,6 +1378,10 @@ void ProcessDialog::checkPathesSet()
         analyzeStartButton_2->setEnabled(true);
     }
     if (true) plotsButton->setEnabled(true);
+    if (!elleDataSetFileName.isEmpty() && !elleExportDirectoryName.isEmpty() && !processRunning)
+    {
+        elleExportButton->setEnabled(true);
+    }
 }
 
 void ProcessDialog::errorPreprocessed()
@@ -1534,6 +1539,7 @@ void ProcessDialog::disableAll()
     subgrainButton->setEnabled(false);
     corrSegmBotton->setEnabled(false);
     loadSegmHDF5Button->setEnabled(false);
+    elleExportButton->setEnabled(false);
 }
 
 //Start Labeling
@@ -3195,6 +3201,40 @@ void ProcessDialog::loadSegmHDF5()
     }
 }
 
+void ProcessDialog::elleExportImage()
+{
+    outputTextEdit->clear();
+    disableAll();
+
+    QStringList args;
+    args << "-elle-export" << elleDataSetFileName << elleExportDirectoryName << elleXBox->text() << elleYBox->text();
+
+    if (!detachedCheckBox->isChecked())
+    {
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        testNr = 0;
+        processRunning=true;
+
+        if (fileExists("cis"))
+            process.start("./cis", args);
+        else if (directoryExists("processdialog.app"))
+            process.start("./processdialog.app/Contents/MacOS/cis", args);
+        else process.start("./../CIS/cis", args);
+    }
+    else
+    {
+        if (fileExists("cis"))
+            process.startDetached("./cis", args);
+        else if (directoryExists("processdialog.app"))
+            process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
+        else process.startDetached("./../CIS/cis", args);
+    }
+}
+
 /***************
 Process handling
 ***************/
@@ -4027,31 +4067,4 @@ void ProcessDialog::checkInstallation()
         else process.start("./../IceMatch/IceMatch -test");
     }
     else write("not found\n",false);
-}
-
-
-void ProcessDialog::elleExportImage()
-{
-    outputTextEdit->clear();
-    disableAll();
-
-    QStringList args;
-    args << "-elle-export" << elleDataSetFileName << elleExportDirectoryName << elleXBox->text() << elleYBox->text();
-
-    if (!detachedCheckBox->isChecked())
-    {
-        if (fileExists("cis"))
-            process.start("./cis", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/cis", args);
-        else process.start("./../CIS/cis", args);
-    }
-    else
-    {
-        if (fileExists("cis"))
-            process.startDetached("./cis", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
-        else process.startDetached("./../CIS/cis", args);
-    }
 }
