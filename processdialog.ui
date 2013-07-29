@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1011</width>
+    <width>1161</width>
     <height>697</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <rect>
      <x>10</x>
      <y>350</y>
-     <width>681</width>
+     <width>831</width>
      <height>271</height>
     </rect>
    </property>
@@ -26,12 +26,12 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QTabWidget" name="tabWidget">
+  <widget class="QTabWidget" name="ImportElle">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>681</width>
+     <width>831</width>
      <height>331</height>
     </rect>
    </property>
@@ -510,6 +510,11 @@
       <string>Check installation</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Import Elle</string>
+    </attribute>
    </widget>
    <widget class="QWidget" name="stitching">
     <attribute name="title">
@@ -2261,7 +2266,7 @@
   <widget class="QPushButton" name="closeButton">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>750</x>
      <y>660</y>
      <width>91</width>
      <height>32</height>
@@ -2274,7 +2279,7 @@
   <widget class="QPushButton" name="killProcessButton">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>640</x>
      <y>660</y>
      <width>114</width>
      <height>32</height>
@@ -2287,7 +2292,7 @@
   <widget class="QCheckBox" name="detachedCheckBox">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>710</x>
      <y>630</y>
      <width>129</width>
      <height>22</height>
@@ -2329,7 +2334,7 @@
   <widget class="QListWidget" name="selectedImageslistWidget">
    <property name="geometry">
     <rect>
-     <x>700</x>
+     <x>850</x>
      <y>40</y>
      <width>301</width>
      <height>581</height>
@@ -2339,7 +2344,7 @@
   <widget class="QLabel" name="selectedImagesLabel">
    <property name="geometry">
     <rect>
-     <x>700</x>
+     <x>850</x>
      <y>9</y>
      <width>181</width>
      <height>31</height>
@@ -2352,7 +2357,7 @@
   <widget class="QCheckBox" name="hideSelectedImagesPathsCheckBox">
    <property name="geometry">
     <rect>
-     <x>910</x>
+     <x>1060</x>
      <y>630</y>
      <width>91</width>
      <height>22</height>
