@@ -37,17 +37,9 @@
 //Define global variables and functions
 std::vector<Profile> profiles;
 
-
-#ifdef Q_OS_LINUX
-QString os = "Linux";
-#elif Q_OS_MAC
-QString os = "Mac";
-#else
-QString os = "Undefined";
-#endif
-
 int main(int argc, char *argv[])
 {
+
     QApplication app(argc, argv);   
 
     ProcessDialog dialog;

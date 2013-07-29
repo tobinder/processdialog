@@ -37,6 +37,4 @@
 //Global variables and functions used by plots-, label-, and processdialog.
 extern std::vector<Profile> profiles;   //Contains all profiles
 
-extern QString os; //The operating system
-
 #endif // GLOBALS_H

@@ -41,8 +41,6 @@
 
 ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
 {       
-    std::cout << "Operating system: " << os.toStdString() << std::endl;
-
     setupUi(this);
 
     disableAll();
@@ -133,52 +131,6 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(elleExportEdit, SIGNAL(textChanged(QString)), this, SLOT(updateElleExportDirectoryName()));
     connect(elleExportButton, SIGNAL(clicked()), this, SLOT(elleExportImage()));
 
-    if(os.compare("Linux") == 0)
-    {
-        QIcon addProfileIcon("./ico_addProfile.png");
-        createNewProfileButton->setIcon(addProfileIcon);
-        QIcon removeProfileIcon("./ico_removeProfile.png");
-        deleteProfileButton->setIcon(removeProfileIcon);
-        QIcon editProfileIcon("./ico_editProfile.png");
-        editProfileNameButton->setIcon(editProfileIcon);
-    }
-
-    if(os.compare("Mac") == 0)
-    {
-        QString addProfileIconPath = "./ico_addProfile.png";
-        if(fileExists(addProfileIconPath.toStdString().c_str()) == true)
-        {
-            QIcon addProfileIcon(addProfileIconPath);
-            createNewProfileButton->setIcon(addProfileIcon);
-        }
-        else
-        {
-            QIcon addProfileIcon("processdialog.app/Contents/MacOS/ico_addProfile.png");
-            createNewProfileButton->setIcon(addProfileIcon);
-        }
-        QString removeProfileIconPath = "./ico_removeProfile.png";
-        if(fileExists(removeProfileIconPath.toStdString().c_str()) == true)
-        {
-            QIcon removeProfileIcon(removeProfileIconPath);
-            deleteProfileButton->setIcon(removeProfileIcon);
-        }
-        else
-        {
-            QIcon removeProfileIcon("processdialog.app/Contents/MacOS/ico_removeProfile.png");
-            deleteProfileButton->setIcon(removeProfileIcon);
-        }
-        QString editProfileIconPath = "./ico_editProfile.png";
-        if(fileExists(editProfileIconPath.toStdString().c_str()) == true)
-        {
-            QIcon editProfileIcon(editProfileIconPath);
-            editProfileNameButton->setIcon(editProfileIcon);
-        }
-        else
-        {
-            QIcon editProfileIcon("processdialog.app/Contents/MacOS/ico_editProfile.png");
-            editProfileNameButton->setIcon(editProfileIcon);
-        }
-    }
 
     //Load last settings
     std::fstream profiles_file;
