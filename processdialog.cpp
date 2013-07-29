@@ -127,6 +127,11 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(editProfileNameButton, SIGNAL(clicked()), this, SLOT(changeProfileName()));
     connect(checkInstallationButton, SIGNAL(clicked()), this, SLOT(checkInstallation()));
 
+    connect(elleDataSetEdit, SIGNAL(textChanged(QString)), this, SLOT(updateElleDataSetFileName()));
+    connect(elleExportEdit, SIGNAL(textChanged(QString)), this, SLOT(updateElleExportDirectoryName()));
+    connect(elleExportButton, SIGNAL(clicked()), this, SLOT(elleExportImage()));
+
+
     //Load last settings
     std::fstream profiles_file;
     std::string pathSettings = (QDir::homePath()).toAscii().data();
@@ -747,6 +752,16 @@ void ProcessDialog::saveSettings()
 Set pathes
 *********/
 
+void ProcessDialog::updateElleDataSetFileName()
+{
+    elleDataSetFileName = elleDataSetEdit->text();
+}
+
+void ProcessDialog::updateElleExportDirectoryName()
+{
+    elleExportDirectoryName = elleExportEdit->text();
+}
+
 void ProcessDialog::updateThumbsDirectoryName()
 {
     thumbsDirectoryName = thumbsEdit->text();
@@ -927,6 +942,31 @@ void ProcessDialog::on_thumbsBrowse_clicked()
     thumbsDirectoryName.append("/");
 
     checkDirEmpty(initialName, thumbsDirectoryName, *thumbsEdit);
+}
+
+//Elle
+void ProcessDialog::on_elleDataSetBrowse_clicked()
+{
+    QString initialName = elleDataSetEdit->text();
+    if (initialName.isEmpty())
+        initialName = QDir::homePath();
+    elleDataSetFileName = QFileDialog::getOpenFileName(this, tr("Choose File"), initialName);
+    elleDataSetFileName = QDir::toNativeSeparators(elleDataSetFileName);
+
+    checkDirEmpty(initialName, elleDataSetFileName, *elleDataSetEdit);
+}
+
+void ProcessDialog::on_elleExportBrowse_clicked()
+{
+    QString initialName = elleExportEdit->text();
+    if (initialName.isEmpty())
+        initialName = QDir::homePath();
+    elleExportDirectoryName = QFileDialog::getExistingDirectory(this, tr("Choose Folder"), initialName);
+    elleExportDirectoryName = QDir::toNativeSeparators(elleExportDirectoryName);
+    elleExportDirectoryName.append("/");
+
+    checkDirEmpty(initialName, elleExportDirectoryName, *elleExportEdit);
+    setSuffix();
 }
 
 //Stitching
@@ -3987,4 +4027,31 @@ void ProcessDialog::checkInstallation()
         else process.start("./../IceMatch/IceMatch -test");
     }
     else write("not found\n",false);
+}
+
+
+void ProcessDialog::elleExportImage()
+{
+    outputTextEdit->clear();
+    disableAll();
+
+    QStringList args;
+    args << "-elle-export" << elleDataSetFileName << elleExportDirectoryName << elleXBox->text() << elleYBox->text();
+
+    if (!detachedCheckBox->isChecked())
+    {
+        if (fileExists("cis"))
+            process.start("./cis", args);
+        else if (directoryExists("processdialog.app"))
+            process.start("./processdialog.app/Contents/MacOS/cis", args);
+        else process.start("./../CIS/cis", args);
+    }
+    else
+    {
+        if (fileExists("cis"))
+            process.startDetached("./cis", args);
+        else if (directoryExists("processdialog.app"))
+            process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
+        else process.startDetached("./../CIS/cis", args);
+    }
 }

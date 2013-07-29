@@ -418,7 +418,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>processdialog.app/Contents/MacOS/ico_addProfile.png</normaloff>processdialog.app/Contents/MacOS/ico_addProfile.png</iconset>
+       <normaloff>ico_addProfile.png</normaloff>ico_addProfile.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -453,7 +453,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>processdialog.app/Contents/MacOS/ico_removeProfile.png</normaloff>processdialog.app/Contents/MacOS/ico_removeProfile.png</iconset>
+       <normaloff>ico_removeProfile.png</normaloff>ico_removeProfile.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -488,7 +488,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>processdialog.app/Contents/MacOS/ico_editProfile.png</normaloff>processdialog.app/Contents/MacOS/ico_editProfile.png</iconset>
+       <normaloff>ico_editProfile.png</normaloff>ico_editProfile.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -515,6 +515,218 @@
     <attribute name="title">
      <string>Import Elle</string>
     </attribute>
+    <widget class="QPushButton" name="elleDataSetBrowse">
+     <property name="geometry">
+      <rect>
+       <x>720</x>
+       <y>13</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>&amp;Browse</string>
+     </property>
+     <property name="shortcut">
+      <string>Alt+B</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="elleDSLabel">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="text">
+      <string>Elle dataset:</string>
+     </property>
+     <property name="buddy">
+      <cstring>originalEdit</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="elleDataSetEdit">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>17</y>
+       <width>541</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="elleExportEdit">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>57</y>
+       <width>541</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="elleExportBrowse">
+     <property name="geometry">
+      <rect>
+       <x>720</x>
+       <y>53</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>&amp;Browse</string>
+     </property>
+     <property name="shortcut">
+      <string>Alt+B</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="elleExportLabel">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="text">
+      <string>Export images to:</string>
+     </property>
+     <property name="buddy">
+      <cstring>originalEdit</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>224</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Image Width (-1 = automatic)</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="elleXBox">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>220</y>
+       <width>64</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>-1</number>
+     </property>
+     <property name="maximum">
+      <number>99999</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>-1</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>224</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Image Height (-1 = automatic)</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="elleYBox">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>220</y>
+       <width>64</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>-1</number>
+     </property>
+     <property name="maximum">
+      <number>99999</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>-1</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="elleExportButton">
+     <property name="geometry">
+      <rect>
+       <x>730</x>
+       <y>260</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Export Image</string>
+     </property>
+     <property name="shortcut">
+      <string>Alt+B</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="stitching">
     <attribute name="title">

@@ -71,6 +71,12 @@ private slots:
     void labeling();
     void plots();   
 
+    void updateElleDataSetFileName();
+    void updateElleExportDirectoryName();
+    void on_elleDataSetBrowse_clicked();
+    void on_elleExportBrowse_clicked();
+    void elleExportImage();
+
     void on_mosaicBrowse_clicked();
     void on_relativeBrowse_clicked();
     void on_stitchedBrowse_clicked();
@@ -202,6 +208,9 @@ private:
 
     QString screenshotsDirectoryName2;
     QString analyzeListFileName;
+
+    QString elleDataSetFileName;
+    QString elleExportDirectoryName;
 
     bool stitchingRunning;
     bool bubblePreprocessingRunning;
