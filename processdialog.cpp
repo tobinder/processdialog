@@ -1060,7 +1060,7 @@ void ProcessDialog::on_imageBrowse_clicked()
     checkPathesSet();
     setSuffix();
 
-    refreshSelectedImages(2);
+    refreshSelectedImages(3);
 }
 
 //CIS
@@ -1128,7 +1128,7 @@ void ProcessDialog::on_imageBrowse1_clicked()
     checkPathesSet();
     setSuffix();
 
-    refreshSelectedImages(3);
+    refreshSelectedImages(4);
 }
 
 //IceGrain
@@ -1184,7 +1184,7 @@ void ProcessDialog::on_imageBrowse2_clicked()
     checkPathesSet();
     setSuffix();
 
-    refreshSelectedImages(4);
+    refreshSelectedImages(5);
 }
 
 //View
@@ -1218,7 +1218,7 @@ void ProcessDialog::on_imageBrowse3_clicked()
     checkPathesSet();
     setSuffix();
 
-    refreshSelectedImages(5);
+    refreshSelectedImages(6);
 }
 
 //Analysis
@@ -1307,8 +1307,8 @@ void ProcessDialog::checkPathesSet()
         extractNetworkButton->setEnabled(true);
     }
     if (!imageDirectoryName.isEmpty() && !selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
-            !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
-            !profilesDirectoryName.isEmpty() && !radioButton_FA->isChecked())
+        !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
+        !profilesDirectoryName.isEmpty() && radioButton_LASM->isChecked())
     {
         subgrainButton->setEnabled(true);
     }
@@ -1318,12 +1318,12 @@ void ProcessDialog::checkPathesSet()
     {
         getParametersButton->setEnabled(true);
     }
-//    if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
-//        !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
-//        radioButton_FA->isChecked() && !suffixCheckBox->isChecked())
-//    {
-//        correctNetworkButton->setEnabled(true);
-//    }
+    if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
+        !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
+        radioButton_FA->isChecked() && !suffixCheckBox->isChecked())
+    {
+        correctNetworkButton->setEnabled(true);
+    }
     if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
         !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
         (!thumbsCheckBox->isChecked() || !thumbsDirectoryName.isEmpty()) && radioButton_FA->isChecked() &&
@@ -1331,12 +1331,6 @@ void ProcessDialog::checkPathesSet()
     {
         extractNetworkButton->setEnabled(true);
     }
-//    if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
-//            !boundaryFeaturesDirectoryName.isEmpty() && !predictionDirectoryName.isEmpty() && !parametersFileName.isEmpty() &&
-//            !profilesDirectoryName.isEmpty() && radioButton_FA->isChecked() && !suffixCheckBox->isChecked())
-//    {
-//        subgrainButton->setEnabled(true);
-//    }
     if (selectedImages2.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
         !predictionDirectoryName.isEmpty() && !plotsDirectoryName.isEmpty() && !profilesDirectoryName.isEmpty() &&
         !boundaryFeaturesDirectoryName.isEmpty() && !parametersFileName.isEmpty() && radioButton_FA->isChecked() &&
@@ -1485,7 +1479,7 @@ bool ProcessDialog::get_FA_path()
     {
         selectedImageFA = segmentationDirectoryName;
         selectedImageFA.append(fileName);
-        selectedImageFA.append(".png");
+        selectedImageFA.append(".bmp");
         return false;
     }
     else return true;
@@ -2068,13 +2062,25 @@ void ProcessDialog::correctNetwork()
 
     if (error_segmentation) errorSegmentation();
 
-    if (!error_segmentation)
+    bool error_cAxes=false;
+    if (radioButton_FA->isChecked()) error_cAxes=get_FA_path();
+    if (error_cAxes) errorFA();
+
+    if (!error_segmentation && !error_cAxes)
     {
         disableAll();
 
         QStringList args;
-        args << "-corrections-gui" << selectedImages2 << segmentationDirectoryName << predictionDirectoryName <<
-            boundaryFeaturesDirectoryName << parametersFileName << suffix;
+        if(!radioButton_FA->isChecked())
+        {
+            args << "-corrections-gui" << selectedImages2 << segmentationDirectoryName << predictionDirectoryName <<
+                boundaryFeaturesDirectoryName << parametersFileName << suffix;
+        }
+        else
+        {
+            args << "-corrections-gui" << selectedImageFA << segmentationDirectoryName << predictionDirectoryName <<
+                boundaryFeaturesDirectoryName << parametersFileName << suffix;
+        }
 
         noNewLine=false;
         stitchingRunning=false;
@@ -3942,11 +3948,15 @@ void ProcessDialog::refreshSelectedImages(int index)
     {
         selectedImageslistWidget->clear();
     }
-    if(index == 1) //Stitching tab
+    if(index == 1) //Import Elle
     {
         selectedImageslistWidget->clear();
     }
-    if(index == 2) //Preprocessing tab
+    if(index == 2) //Stitching tab
+    {
+        selectedImageslistWidget->clear();
+    }
+    if(index == 3) //Preprocessing tab
     {
         selectedImageslistWidget->clear();
         if(hidePaths)
@@ -3963,7 +3973,7 @@ void ProcessDialog::refreshSelectedImages(int index)
             selectedImageslistWidget->addItems(selectedImages);
         }
     }
-    if(index == 3) //Segmentation tab
+    if(index == 4) //Segmentation tab
     {
         selectedImageslistWidget->clear();
         if(hidePaths)
@@ -3980,7 +3990,7 @@ void ProcessDialog::refreshSelectedImages(int index)
             selectedImageslistWidget->addItems(selectedImages1);
         }
     }
-    if(index == 4) //Network Extraction tab
+    if(index == 5) //Network Extraction tab
     {
         selectedImageslistWidget->clear();
         if(hidePaths)
@@ -3997,7 +4007,7 @@ void ProcessDialog::refreshSelectedImages(int index)
             selectedImageslistWidget->addItems(selectedImages2);
         }
     }
-    if(index == 5) //View tab
+    if(index == 6) //View tab
     {
         selectedImageslistWidget->clear();
         if(hidePaths)
@@ -4010,7 +4020,7 @@ void ProcessDialog::refreshSelectedImages(int index)
             selectedImageslistWidget->addItem(selectedImage3);
         }
     }
-    if(index == 6) //Analysis tab
+    if(index == 7) //Analysis tab
     {
         selectedImageslistWidget->clear();
     }
