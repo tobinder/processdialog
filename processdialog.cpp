@@ -697,7 +697,7 @@ void ProcessDialog::saveSettings()
     else profiles[Profile::activeProfileIndex].data[35] = "1";
 
     //Resize profile if necessary
-    for(int a = 0; a < (int)profiles[a].data.size(); a++)
+    for(int a = 0; a < (int)profiles.size(); a++)
     {
         if(profiles[a].data.size() < Profile::numberOfSettings)
         {
@@ -3824,7 +3824,7 @@ void ProcessDialog::createNewProfile()
                 //Add profile with empty data
                 std::vector<QString> empty;
                 empty.push_back("[" + newProfileName + "]");
-                for(int i = 0; i < Profile::numberOfSettings; i++)
+                for(int i = 0; i < Profile::numberOfSettings-1; i++)
                 {
                     empty.push_back("");
                 }
