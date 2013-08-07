@@ -1671,11 +1671,11 @@ void ProcessDialog::createThumbs()
     else
     {
         //output folders, create if not existing
-        QString newPath = preprocessedDirectoryName;
+        QString newPath = thumbsDirectoryName;
         newPath.append(suffix);
-        args << "-as" << selectedImages << newPath;
+        args << "-resize" << selectedImages << newPath;
 
-        QDir dir(preprocessedDirectoryName);
+        QDir dir(thumbsDirectoryName);
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
@@ -1715,11 +1715,11 @@ void ProcessDialog::reduceThumbs()
     else
     {
         //output folders, create if not existing
-        QString newPath = preprocessedDirectoryName;
+        QString newPath = thumbsDirectoryName;
         newPath.append(suffix);
-        args << "-as" << selectedImages << newPath;
+        args << "-reduce" << selectedImages << newPath;
 
-        QDir dir(preprocessedDirectoryName);
+        QDir dir(thumbsDirectoryName);
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
