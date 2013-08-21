@@ -2440,10 +2440,19 @@ void ProcessDialog::depthProfiles()
     outputTextEdit->clear();
 
     QStringList args;
-    args << "-depth-profile-gui" << depthBinWidthBox->text() << nrDepthsBox->text() << lowGrainSizeBox->text() <<
+    if (suffixCheckBox->isChecked())
+    {
+        args << "-depth-profile-gui" << depthBinWidthBox->text() << nrDepthsBox->text() <<
+            lowGrainSizeBox->text() << highGrainSizeBox->text() << grainSizeStepBox->text() <<
+            minBubbleDistanceBox->text() << grainStepBox->text() << profilesDirectoryName <<
+            parametersFileName;
+    }
+    else
+    {
+        args << "-single-depth-profile-gui" << depthBinWidthBox->text() << lowGrainSizeBox->text() <<
             highGrainSizeBox->text() << grainSizeStepBox->text() << minBubbleDistanceBox->text() <<
             grainStepBox->text() << profilesDirectoryName << parametersFileName;
-
+    }
     //output folders, create if not existing
     QDir dir(profilesDirectoryName);
 
