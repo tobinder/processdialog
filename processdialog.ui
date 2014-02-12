@@ -416,16 +416,6 @@
      <property name="text">
       <string/>
      </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>ico_addProfile.png</normaloff>ico_addProfile.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>16</width>
-       <height>16</height>
-      </size>
-     </property>
      <property name="checkable">
       <bool>false</bool>
      </property>
@@ -451,16 +441,6 @@
      <property name="text">
       <string/>
      </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>ico_removeProfile.png</normaloff>ico_removeProfile.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>16</width>
-       <height>16</height>
-      </size>
-     </property>
      <property name="autoDefault">
       <bool>true</bool>
      </property>
@@ -485,16 +465,6 @@
      </property>
      <property name="text">
       <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>ico_editProfile.png</normaloff>ico_editProfile.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>16</width>
-       <height>16</height>
-      </size>
      </property>
     </widget>
     <widget class="QPushButton" name="checkInstallationButton">

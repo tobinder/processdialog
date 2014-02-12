@@ -43,6 +43,13 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
 {       
     setupUi(this);
 
+    createNewProfileButton->setIcon(QIcon(QApplication::applicationDirPath() + "/ico_addProfile.png"));
+    createNewProfileButton->setIconSize(QSize(16,16));
+    deleteProfileButton->setIcon(QIcon(QApplication::applicationDirPath() + "/ico_removeProfile.png"));
+    deleteProfileButton->setIconSize(QSize(16,16));
+    editProfileNameButton->setIcon(QIcon(QApplication::applicationDirPath() + "/ico_editProfile.png"));
+    editProfileNameButton->setIconSize(QSize(16,16));
+
     disableAll();
     suffixCheckBox->setChecked(false);
     thumbsCheckBox->setChecked(false);
@@ -1566,10 +1573,13 @@ void ProcessDialog::stitchImages()
     testNr = 0;
     processRunning=true;
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/IceMatch");
+
     if (fileExists("IceMatch"))
         process.start("./IceMatch", args);
-    else if (directoryExists("processdialog.app"))
-        process.start("./processdialog.app/Contents/MacOS/IceMatch", args);
+    else if (fileExists(exPath.toStdString().c_str()))
+        process.start(exPath, args);
     else process.start("./../IceMatch/IceMatch", args);
 }
 
@@ -1591,6 +1601,9 @@ void ProcessDialog::preprocessImage()
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/preprocess");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -1601,18 +1614,14 @@ void ProcessDialog::preprocessImage()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("preprocess"))
-            process.start("./preprocess", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/preprocess", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../preprocessing/preprocess", args);
     }
     else
     {
-        if (fileExists("preprocess"))
-            process.startDetached("./preprocess", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/preprocess", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../preprocessing/preprocess", args);
     }
 }
@@ -1635,6 +1644,9 @@ void ProcessDialog::preprocessImage2()
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/preprocess");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -1645,18 +1657,14 @@ void ProcessDialog::preprocessImage2()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("preprocess"))
-            process.start("./preprocess", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/preprocess", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../preprocessing/preprocess", args);
     }
     else
     {
-        if (fileExists("preprocess"))
-            process.startDetached("./preprocess", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/preprocess", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../preprocessing/preprocess", args);
     }
 }
@@ -1679,6 +1687,9 @@ void ProcessDialog::createThumbs()
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/cis");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -1689,18 +1700,14 @@ void ProcessDialog::createThumbs()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("cis"))
-            process.start("./cis", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/cis", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../CIS/cis", args);
     }
     else
     {
-        if (fileExists("cis"))
-            process.startDetached("./cis", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../CIS/cis", args);
     }
 }
@@ -1723,6 +1730,9 @@ void ProcessDialog::reduceThumbs()
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/preprocess");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -1733,18 +1743,14 @@ void ProcessDialog::reduceThumbs()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("preprocess"))
-            process.start("./preprocess", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/preprocess", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../preprocessing/preprocess", args);
     }
     else
     {
-        if (fileExists("preprocess"))
-            process.startDetached("./preprocess", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/preprocess", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../preprocessing/preprocess", args);
     }
 }
@@ -1812,6 +1818,9 @@ void ProcessDialog::segmentImage()
         args << "-pixel-complete-gui" << preprocessedDirectoryName << pixelFeaturesDir << probMapDirectoryName <<
             segmentationDirectoryName << boundaryFeaturesDirectoryName << selectedImages1 << parametersFileName << suffix << thumbs;
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/cis");
+
         if (!detachedCheckBox->isChecked())
         {
             noNewLine=false;
@@ -1822,18 +1831,14 @@ void ProcessDialog::segmentImage()
             testNr = 0;
             processRunning=true;
 
-            if (fileExists("cis"))
-                process.start("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../CIS/cis", args);
         }
         else
         {
-            if (fileExists("cis"))
-                process.startDetached("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../CIS/cis", args);
         }
     }
@@ -1885,20 +1890,19 @@ void ProcessDialog::loadProb()
         testNr = 0;
         processRunning=true;
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/cis");
+
         if (!detachedCheckBox->isChecked())
         {           
-            if (fileExists("cis"))
-                process.start("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../CIS/cis", args);
         }
         else
         {
-            if (fileExists("cis"))
-                process.startDetached("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../CIS/cis", args);
         }
     }
@@ -1940,20 +1944,19 @@ void ProcessDialog::loadSegm()
         testNr = 0;
         processRunning=true;
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/cis");
+
         if (!detachedCheckBox->isChecked())
         {            
-            if (fileExists("cis"))
-                process.start("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../CIS/cis", args);
         }
         else
         {
-            if (fileExists("cis"))
-                process.startDetached("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../CIS/cis", args);
         }
     }
@@ -2006,10 +2009,11 @@ void ProcessDialog::corrSegm()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("SubGB"))
-            process.start("./SubGB", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/SubGB", args);
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/SubGB");
+
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../SubGB/SubGB", args);
     }
 }
@@ -2090,10 +2094,11 @@ void ProcessDialog::correctNetwork()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
 }
@@ -2172,6 +2177,9 @@ void ProcessDialog::findSubgrains()
         args << "-subgrains-gui" << selectedImages2Names << boundaryFeaturesDir << suffix << parametersFileName << imageDirectoryName << segmentationDirectoryName << predictionDirectoryName
              << predictionSubGBDirectoryName << profilesDirectoryName;
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
         if (!detachedCheckBox->isChecked())
         {
             noNewLine=false;
@@ -2182,18 +2190,14 @@ void ProcessDialog::findSubgrains()
             testNr = 0;
             processRunning=true;
 
-            if (fileExists("IceGrain"))
-                process.start("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../IceGrain/IceGrain", args);
         }
         else
         {
-            if (fileExists("IceGrain"))
-                process.startDetached("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../IceGrain/IceGrain", args);
         }
     }
@@ -2324,6 +2328,9 @@ void ProcessDialog::extractNetwork()
                 boundaryFeaturesDir << parametersFileName << suffix << thumbs << useOriginalImage;
         }
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
         if (!detachedCheckBox->isChecked())
         {
             noNewLine=false;
@@ -2334,18 +2341,14 @@ void ProcessDialog::extractNetwork()
             testNr = 0;
             processRunning=true;
 
-            if (fileExists("IceGrain"))
-                process.start("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../IceGrain/IceGrain", args);
         }
         else
         {
-            if (fileExists("IceGrain"))
-                process.startDetached("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../IceGrain/IceGrain", args);
         }
     }
@@ -2407,6 +2410,9 @@ void ProcessDialog::getParameters()
                 profilesDirectoryName << boundaryFeaturesDirectoryName << parametersFileName << suffix;
         }
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
         if (!detachedCheckBox->isChecked())
         {
             noNewLine=false;
@@ -2417,18 +2423,14 @@ void ProcessDialog::getParameters()
             testNr = 0;
             processRunning=true;
 
-            if (fileExists("IceGrain"))
-                process.start("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../IceGrain/IceGrain", args);
         }
         else
         {
-            if (fileExists("IceGrain"))
-                process.startDetached("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../IceGrain/IceGrain", args);
         }
     }
@@ -2472,6 +2474,9 @@ void ProcessDialog::depthProfiles()
     subFolder.append("step");
     if (!directoryExists(subFolder.toAscii().data())) dir.mkdir("step");
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/IceGrain");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -2482,18 +2487,14 @@ void ProcessDialog::depthProfiles()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
     else
     {
-        if (fileExists("IceGrain"))
-            process.startDetached("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../IceGrain/IceGrain", args);
     }
 }
@@ -2551,10 +2552,11 @@ void ProcessDialog::viewGrains()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
 }
@@ -2612,10 +2614,11 @@ void ProcessDialog::viewBoundaries()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
 }
@@ -2673,10 +2676,11 @@ void ProcessDialog::viewJunctions()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
 }
@@ -2726,6 +2730,9 @@ void ProcessDialog::analyzeJunctions()
             profilesDirectoryName << boundaryFeaturesDirectoryName << lowGrainSizeBox->text() << minBubbleDistanceBox->text() <<
             "3" << startValue << parametersFileName << suffix;
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
         if (!detachedCheckBox->isChecked())
         {
             noNewLine=false;
@@ -2736,18 +2743,14 @@ void ProcessDialog::analyzeJunctions()
             testNr = 0;
             processRunning=true;
 
-            if (fileExists("IceGrain"))
-                process.start("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../IceGrain/IceGrain", args);
         }
         else
         {
-            if (fileExists("IceGrain"))
-                process.startDetached("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../IceGrain/IceGrain", args);
         }
     }
@@ -2798,6 +2801,9 @@ void ProcessDialog::grainOverview()
             profilesDirectoryName << boundaryFeaturesDirectoryName << lowGrainSizeBox->text() << minBubbleDistanceBox->text() <<
             "4" << startValue << parametersFileName << suffix;
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
         if (!detachedCheckBox->isChecked())
         {
             noNewLine=false;
@@ -2808,18 +2814,14 @@ void ProcessDialog::grainOverview()
             testNr = 0;
             processRunning=true;
 
-            if (fileExists("IceGrain"))
-                process.start("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../IceGrain/IceGrain", args);
         }
         else
         {
-            if (fileExists("IceGrain"))
-                process.startDetached("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../IceGrain/IceGrain", args);
         }
     }
@@ -2870,6 +2872,9 @@ void ProcessDialog::boundaryOverview()
             profilesDirectoryName << boundaryFeaturesDirectoryName << lowGrainSizeBox->text() << minBubbleDistanceBox->text() <<
             "9" << startValue << parametersFileName << suffix;
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
         if (!detachedCheckBox->isChecked())
         {
             noNewLine=false;
@@ -2880,18 +2885,14 @@ void ProcessDialog::boundaryOverview()
             testNr = 0;
             processRunning=true;
 
-            if (fileExists("IceGrain"))
-                process.start("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../IceGrain/IceGrain", args);
         }
         else
         {
-            if (fileExists("IceGrain"))
-                process.startDetached("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../IceGrain/IceGrain", args);
         }
     }
@@ -2942,6 +2943,9 @@ void ProcessDialog::localCurvature()
             profilesDirectoryName << boundaryFeaturesDirectoryName << lowGrainSizeBox->text() << minBubbleDistanceBox->text() <<
             "6" << startValue << parametersFileName << suffix;
 
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/IceGrain");
+
         if (!detachedCheckBox->isChecked())
         {
             noNewLine=false;
@@ -2952,18 +2956,14 @@ void ProcessDialog::localCurvature()
             testNr = 0;
             processRunning=true;
 
-            if (fileExists("IceGrain"))
-                process.start("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../IceGrain/IceGrain", args);
         }
         else
         {
-            if (fileExists("IceGrain"))
-                process.startDetached("./IceGrain", args);
-            else if (directoryExists("processdialog.app"))
-                process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.startDetached(exPath, args);
             else process.startDetached("./../IceGrain/IceGrain", args);
         }
     }
@@ -2983,6 +2983,9 @@ void ProcessDialog::analyze()
             minBubbleDistanceBox->text() << parametersFileName << screenshotsDirectoryName2 << "0" << "0" << "0" << "0"<<
             segmentationDirectoryName << suff;
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/IceGrain");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -2993,18 +2996,14 @@ void ProcessDialog::analyze()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
     else
     {
-        if (fileExists("IceGrain"))
-            process.startDetached("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../IceGrain/IceGrain", args);
     }
 }
@@ -3028,6 +3027,9 @@ void ProcessDialog::plotParam()
         minBubbleDistanceBox->text() << parametersFileName << screenshotsDirectoryName2 << "1" << combo1 <<
         paramSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/IceGrain");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -3038,18 +3040,14 @@ void ProcessDialog::plotParam()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
     else
     {
-        if (fileExists("IceGrain"))
-            process.startDetached("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../IceGrain/IceGrain", args);
     }
 }
@@ -3073,6 +3071,9 @@ void ProcessDialog::listParam()
         minBubbleDistanceBox->text() << parametersFileName << screenshotsDirectoryName2 << "3" << combo1 <<
         paramSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/IceGrain");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -3083,18 +3084,14 @@ void ProcessDialog::listParam()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
     else
     {
-        if (fileExists("IceGrain"))
-            process.startDetached("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../IceGrain/IceGrain", args);
     }
 }
@@ -3118,6 +3115,9 @@ void ProcessDialog::plotCorrelation()
         minBubbleDistanceBox->text() << parametersFileName << screenshotsDirectoryName2 << "2" << combo1 <<
         corrSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/IceGrain");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -3128,18 +3128,14 @@ void ProcessDialog::plotCorrelation()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
     else
     {
-        if (fileExists("IceGrain"))
-            process.startDetached("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../IceGrain/IceGrain", args);
     }
 }
@@ -3158,6 +3154,9 @@ void ProcessDialog::newProfiles()
             minBubbleDistanceBox->text() << parametersFileName << suff << highGrainSizeBox->text() << grainSizeStepBox->text() <<
             depthBinWidthBox->text();
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/IceGrain");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -3168,18 +3167,14 @@ void ProcessDialog::newProfiles()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("IceGrain"))
-            process.start("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../IceGrain/IceGrain", args);
     }
     else
     {
-        if (fileExists("IceGrain"))
-            process.startDetached("./IceGrain", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/IceGrain", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../IceGrain/IceGrain", args);
     }
 }
@@ -3208,10 +3203,11 @@ void ProcessDialog::loadSegmHDF5()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("cis"))
-            process.start("./cis", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/cis", args);
+        QString exPath = QApplication::applicationDirPath();
+        exPath.append("/cis");
+
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../CIS/cis", args);
     }
 }
@@ -3224,6 +3220,9 @@ void ProcessDialog::elleExportImage()
     QStringList args;
     args << "-elle-export" << elleDataSetFileName << elleExportDirectoryName << elleXBox->text() << elleYBox->text();
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/cis");
+
     if (!detachedCheckBox->isChecked())
     {
         noNewLine=false;
@@ -3234,18 +3233,14 @@ void ProcessDialog::elleExportImage()
         testNr = 0;
         processRunning=true;
 
-        if (fileExists("cis"))
-            process.start("./cis", args);
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/cis", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath, args);
         else process.start("./../CIS/cis", args);
     }
     else
     {
-        if (fileExists("cis"))
-            process.startDetached("./cis", args);
-        else if (directoryExists("processdialog.app"))
-            process.startDetached("./processdialog.app/Contents/MacOS/cis", args);
+        if (fileExists(exPath.toStdString().c_str()))
+            process.startDetached(exPath, args);
         else process.startDetached("./../CIS/cis", args);
     }
 }
@@ -3356,11 +3351,12 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             QStringList args;
             args << batchListFileName << mosaicDirectoryName << relativeDirectoryName << stitchedDirectoryName;
 
+            QString exPath = QApplication::applicationDirPath();
+            exPath.append("/IceView");
+
             stitchingRunning=false;   
-            if (fileExists("IceView"))
-                process.start("./IceView", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/IceView", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../IceView/IceView", args);
         }
         //Calculate cgp structure after interactive manipulation of ws region image
@@ -3376,12 +3372,13 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             QStringList args;
             args << "-cgp-structure" << segFileName << segDirName;
 
+            QString exPath = QApplication::applicationDirPath();
+            exPath.append("/cis");
+
             correctSegmentationRunning2=false;
             correctSegmentationRunning=true;
-            if (fileExists("cis"))
-                process.start("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../CIS/cis", args);
         }
         //Calculate boundary features after reload of probmap/segmentation
@@ -3404,11 +3401,12 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             args << "-boundary-features-gui" << selectedImages1 << segmentationDirectoryName << temp <<
                 "pixel-features/" << boundaryFeaturesDirectoryName << parametersFileName << suffix << thumbs;
 
+            QString exPath = QApplication::applicationDirPath();
+            exPath.append("/cis");
+
             correctSegmentationRunning=false;
-            if (fileExists("cis"))
-                process.start("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../CIS/cis", args);
         }
         //Create a bubble image
@@ -3427,11 +3425,12 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
                 args << "-bubbles-gui" << selectedImages << newPath << parametersFileName << firn;
             }
 
+            QString exPath = QApplication::applicationDirPath();
+            exPath.append("/cis");
+
             bubblePreprocessingRunning=false;
-            if (fileExists("cis"))
-                process.start("./cis", args);
-            else if (directoryExists("processdialog.app"))
-                process.start("./processdialog.app/Contents/MacOS/cis", args);
+            if (fileExists(exPath.toStdString().c_str()))
+                process.start(exPath, args);
             else process.start("./../CIS/cis", args);
         }
         else if(testNr > 0)
@@ -3441,13 +3440,14 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
 
             if(testNr==2)
             {
+                QString exPath = QApplication::applicationDirPath();
+                exPath.append("/IceView");
+
                 write("Checking IceView... ",false);
-                if (fileExists("IceView") || fileExists("./processdialog.app/Contents/MacOS/IceView") || fileExists("./../IceView/IceView"))
+                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../IceView/IceView"))
                 {
-                    if (fileExists("IceView"))
-                       process.start("./IceView -test");
-                    else if (directoryExists("processdialog.app"))
-                        process.start("./processdialog.app/Contents/MacOS/IceView -test");
+                    if (fileExists(exPath.toStdString().c_str()))
+                        process.start(exPath + " -test");
                     else process.start("./../IceView/IceView -test");
                 }
                 else
@@ -3460,13 +3460,14 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
 
             else if(testNr==3)
             {
+                QString exPath = QApplication::applicationDirPath();
+                exPath.append("/preprocess");
+
                 write("Checking Preprocess... ",false);
-                if (fileExists("preprocess") || fileExists("./processdialog.app/Contents/MacOS/preprocess") || fileExists("./../preprocessing/preprocess"))
+                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../preprocessing/preprocess"))
                 {
-                    if (fileExists("preprocess"))
-                        process.start("./preprocess -test");
-                    else if (directoryExists("processdialog.app"))
-                        process.start("./processdialog.app/Contents/MacOS/preprocess -test");
+                    if (fileExists(exPath.toStdString().c_str()))
+                        process.start(exPath + " -test");
                     else process.start("./../preprocessing/preprocess -test");
                 }
                 else
@@ -3479,13 +3480,14 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
 
             else if(testNr==4)
             {
+                QString exPath = QApplication::applicationDirPath();
+                exPath.append("/cis");
+
                 write("Checking CIS... ",false);
-                if (fileExists("cis") || fileExists("./processdialog.app/Contents/MacOS/cis") || fileExists("./../CIS/cis"))
+                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../CIS/cis"))
                 {
-                    if (fileExists("cis"))
-                        process.start("./cis -test");
-                    else if (directoryExists("processdialog.app"))
-                        process.start("./processdialog.app/Contents/MacOS/cis -test");
+                    if (fileExists(exPath.toStdString().c_str()))
+                        process.start(exPath + " -test");
                     else process.start("./../CIS/cis -test");
                 }
                 else
@@ -3498,13 +3500,14 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
 
             else if(testNr==5)
             {
+                QString exPath = QApplication::applicationDirPath();
+                exPath.append("/IceGrain");
+
                 write("Checking IceGrain... ",false);
-                if (fileExists("IceGrain") || fileExists("./processdialog.app/Contents/MacOS/IceGrain") || fileExists("./../IceGrain/IceGrain"))
+                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../IceGrain/IceGrain"))
                 {
-                    if (fileExists("IceGrain"))
-                        process.start("./IceGrain -test");
-                    else if (directoryExists("processdialog.app"))
-                        process.start("./processdialog.app/Contents/MacOS/IceGrain -test");
+                    if (fileExists(exPath.toStdString().c_str()))
+                        process.start(exPath + " -test");
                     else process.start("./../IceGrain/IceGrain -test");
                 }
                 else
@@ -3517,13 +3520,14 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
 
             else if(testNr==6)
             {
+                QString exPath = QApplication::applicationDirPath();
+                exPath.append("/SubGB");
+
                 write("Checking SubGB... ",false);
-                if (fileExists("SubGB") || fileExists("./processdialog.app/Contents/MacOS/SubGB") || fileExists("./../SubGB/SubGB"))
+                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../SubGB/SubGB"))
                 {
-                    if (fileExists("SubGB"))
-                        process.start("./SubGB -test");
-                    else if (directoryExists("processdialog.app"))
-                        process.start("./processdialog.app/Contents/MacOS/SubGB -test");
+                    if (fileExists(exPath.toStdString().c_str()))
+                        process.start(exPath + " -test");
                     else process.start("./../SubGB/SubGB -test");
                 }
                 else
@@ -4072,17 +4076,18 @@ void ProcessDialog::checkInstallation()
     correctSegmentationRunning = false;
     correctSegmentationRunning2 = false;
 
+    QString exPath = QApplication::applicationDirPath();
+    exPath.append("/IceMatch");
+
     write("",true);
     write("Checking IceMatch... ",false);
-    if (fileExists("IceMatch") || fileExists("./processdialog.app/Contents/MacOS/IceMatch") || fileExists("./../IceMatch/IceMatch"))
+    if (fileExists(exPath.toStdString().c_str()) || fileExists("./../IceMatch/IceMatch"))
     {
         testNr = 1;
         processRunning=true;
 
-        if (fileExists("IceMatch"))
-            process.start("./IceMatch -test");
-        else if (directoryExists("processdialog.app"))
-            process.start("./processdialog.app/Contents/MacOS/IceMatch -test");
+        if (fileExists(exPath.toStdString().c_str()))
+            process.start(exPath + " -test");
         else process.start("./../IceMatch/IceMatch -test");
     }
     else write("not found\n",false);
