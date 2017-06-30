@@ -216,7 +216,6 @@ private:
     bool bubblePreprocessingRunning;
     bool correctSegmentationRunning;
     bool correctSegmentationRunning2;
-    int  testNr;
     bool processRunning;
     bool noNewLine;
 

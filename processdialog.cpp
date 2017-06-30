@@ -132,7 +132,6 @@ ProcessDialog::ProcessDialog(QWidget *parent): QDialog(parent)
     connect(createNewProfileButton, SIGNAL(clicked()), this, SLOT(createNewProfile()));
     connect(deleteProfileButton, SIGNAL(clicked()), this, SLOT(deleteProfile()));
     connect(editProfileNameButton, SIGNAL(clicked()), this, SLOT(changeProfileName()));
-    connect(checkInstallationButton, SIGNAL(clicked()), this, SLOT(checkInstallation()));
 
     connect(elleDataSetEdit, SIGNAL(textChanged(QString)), this, SLOT(updateElleDataSetFileName()));
     connect(elleExportEdit, SIGNAL(textChanged(QString)), this, SLOT(updateElleExportDirectoryName()));
@@ -1570,17 +1569,9 @@ void ProcessDialog::stitchImages()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    testNr = 0;
     processRunning=true;
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/IceMatch");
-
-    if (fileExists("IceMatch"))
-        process.start("./IceMatch", args);
-    else if (fileExists(exPath.toStdString().c_str()))
-        process.start(exPath, args);
-    else process.start("./../IceMatch/IceMatch", args);
+    process.start("./../IceMatch/IceMatch", args);
 }
 
 void ProcessDialog::preprocessImage()
@@ -1601,29 +1592,14 @@ void ProcessDialog::preprocessImage()
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/preprocess");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../preprocessing/preprocess", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../preprocessing/preprocess", args);
-    }
+    process.start("/home/ollie/tbinder/scripts/preprocess.sh", args);
 }
 
 void ProcessDialog::preprocessImage2()
@@ -1644,29 +1620,14 @@ void ProcessDialog::preprocessImage2()
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/preprocess");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=true;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=true;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../preprocessing/preprocess", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../preprocessing/preprocess", args);
-    }
+    process.start("/home/ollie/tbinder/scripts/preprocess.sh", args);
 }
 
 void ProcessDialog::createThumbs()
@@ -1687,29 +1648,14 @@ void ProcessDialog::createThumbs()
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/cis");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../CIS/cis", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../CIS/cis", args);
-    }
+    process.start("/home/ollie/tbinder/scripts/cis.sh", args);
 }
 
 void ProcessDialog::reduceThumbs()
@@ -1730,29 +1676,14 @@ void ProcessDialog::reduceThumbs()
         if (!directoryExists(newPath.toAscii().data())) dir.mkdir(suffix.toAscii().data());
     }
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/preprocess");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../preprocessing/preprocess", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../preprocessing/preprocess", args);
-    }
+    process.start("/home/ollie/tbinder/scripts/preprocess.sh", args);
 }
 
 void ProcessDialog::segmentImage()
@@ -1818,29 +1749,14 @@ void ProcessDialog::segmentImage()
         args << "-pixel-complete-gui" << preprocessedDirectoryName << pixelFeaturesDir << probMapDirectoryName <<
             segmentationDirectoryName << boundaryFeaturesDirectoryName << selectedImages1 << parametersFileName << suffix << thumbs;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/cis");
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        processRunning=true;
 
-        if (!detachedCheckBox->isChecked())
-        {
-            noNewLine=false;
-            stitchingRunning=false;
-            bubblePreprocessingRunning=false;
-            correctSegmentationRunning=false;
-            correctSegmentationRunning2=false;
-            testNr = 0;
-            processRunning=true;
-
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../CIS/cis", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../CIS/cis", args);
-        }
+        process.start("/home/ollie/tbinder/scripts/cis.sh", args);
     }
 }
 
@@ -1887,24 +1803,9 @@ void ProcessDialog::loadProb()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=true;
         correctSegmentationRunning2=false;
-        testNr = 0;
         processRunning=true;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/cis");
-
-        if (!detachedCheckBox->isChecked())
-        {           
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../CIS/cis", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../CIS/cis", args);
-        }
+        process.start("/home/ollie/tbinder/scripts/cis.sh", args);
     }
 }
 
@@ -1941,24 +1842,9 @@ void ProcessDialog::loadSegm()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=true;
         correctSegmentationRunning2=false;
-        testNr = 0;
         processRunning=true;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/cis");
-
-        if (!detachedCheckBox->isChecked())
-        {            
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../CIS/cis", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../CIS/cis", args);
-        }
+        process.start("/home/ollie/tbinder/scripts/cis.sh", args);
     }
 }
 
@@ -2006,15 +1892,9 @@ void ProcessDialog::corrSegm()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=true;
-        testNr = 0;
         processRunning=true;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/SubGB");
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../SubGB/SubGB", args);
+        process.start("./../SubGB/SubGB", args);
     }
 }
 
@@ -2091,15 +1971,9 @@ void ProcessDialog::correctNetwork()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        testNr = 0;
         processRunning=true;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2177,29 +2051,14 @@ void ProcessDialog::findSubgrains()
         args << "-subgrains-gui" << selectedImages2Names << boundaryFeaturesDir << suffix << parametersFileName << imageDirectoryName << segmentationDirectoryName << predictionDirectoryName
              << predictionSubGBDirectoryName << profilesDirectoryName;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        processRunning=true;
 
-        if (!detachedCheckBox->isChecked())
-        {
-            noNewLine=false;
-            stitchingRunning=false;
-            bubblePreprocessingRunning=false;
-            correctSegmentationRunning=false;
-            correctSegmentationRunning2=false;
-            testNr = 0;
-            processRunning=true;
-
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../IceGrain/IceGrain", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../IceGrain/IceGrain", args);
-        }
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2328,29 +2187,14 @@ void ProcessDialog::extractNetwork()
                 boundaryFeaturesDir << parametersFileName << suffix << thumbs << useOriginalImage;
         }
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        processRunning=true;
 
-        if (!detachedCheckBox->isChecked())
-        {
-            noNewLine=false;
-            stitchingRunning=false;
-            bubblePreprocessingRunning=false;
-            correctSegmentationRunning=false;
-            correctSegmentationRunning2=false;
-            testNr = 0;
-            processRunning=true;
-
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../IceGrain/IceGrain", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../IceGrain/IceGrain", args);
-        }
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2410,29 +2254,14 @@ void ProcessDialog::getParameters()
                 profilesDirectoryName << boundaryFeaturesDirectoryName << parametersFileName << suffix;
         }
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        processRunning=true;
 
-        if (!detachedCheckBox->isChecked())
-        {
-            noNewLine=false;
-            stitchingRunning=false;
-            bubblePreprocessingRunning=false;
-            correctSegmentationRunning=false;
-            correctSegmentationRunning2=false;
-            testNr = 0;
-            processRunning=true;
-
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../IceGrain/IceGrain", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../IceGrain/IceGrain", args);
-        }
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2474,29 +2303,14 @@ void ProcessDialog::depthProfiles()
     subFolder.append("step");
     if (!directoryExists(subFolder.toAscii().data())) dir.mkdir("step");
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/IceGrain");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../IceGrain/IceGrain", args);
-    }
+    process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::viewGrains()
@@ -2549,15 +2363,9 @@ void ProcessDialog::viewGrains()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        testNr = 0;
         processRunning=true;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2611,15 +2419,9 @@ void ProcessDialog::viewBoundaries()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        testNr = 0;
         processRunning=true;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2673,15 +2475,9 @@ void ProcessDialog::viewJunctions()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        testNr = 0;
         processRunning=true;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2730,29 +2526,14 @@ void ProcessDialog::analyzeJunctions()
             profilesDirectoryName << boundaryFeaturesDirectoryName << lowGrainSizeBox->text() << minBubbleDistanceBox->text() <<
             "3" << startValue << parametersFileName << suffix;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        processRunning=true;
 
-        if (!detachedCheckBox->isChecked())
-        {
-            noNewLine=false;
-            stitchingRunning=false;
-            bubblePreprocessingRunning=false;
-            correctSegmentationRunning=false;
-            correctSegmentationRunning2=false;
-            testNr = 0;
-            processRunning=true;
-
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../IceGrain/IceGrain", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../IceGrain/IceGrain", args);
-        }
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2801,29 +2582,14 @@ void ProcessDialog::grainOverview()
             profilesDirectoryName << boundaryFeaturesDirectoryName << lowGrainSizeBox->text() << minBubbleDistanceBox->text() <<
             "4" << startValue << parametersFileName << suffix;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        processRunning=true;
 
-        if (!detachedCheckBox->isChecked())
-        {
-            noNewLine=false;
-            stitchingRunning=false;
-            bubblePreprocessingRunning=false;
-            correctSegmentationRunning=false;
-            correctSegmentationRunning2=false;
-            testNr = 0;
-            processRunning=true;
-
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../IceGrain/IceGrain", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../IceGrain/IceGrain", args);
-        }
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2872,29 +2638,14 @@ void ProcessDialog::boundaryOverview()
             profilesDirectoryName << boundaryFeaturesDirectoryName << lowGrainSizeBox->text() << minBubbleDistanceBox->text() <<
             "9" << startValue << parametersFileName << suffix;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        processRunning=true;
 
-        if (!detachedCheckBox->isChecked())
-        {
-            noNewLine=false;
-            stitchingRunning=false;
-            bubblePreprocessingRunning=false;
-            correctSegmentationRunning=false;
-            correctSegmentationRunning2=false;
-            testNr = 0;
-            processRunning=true;
-
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../IceGrain/IceGrain", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../IceGrain/IceGrain", args);
-        }
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2943,29 +2694,14 @@ void ProcessDialog::localCurvature()
             profilesDirectoryName << boundaryFeaturesDirectoryName << lowGrainSizeBox->text() << minBubbleDistanceBox->text() <<
             "6" << startValue << parametersFileName << suffix;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/IceGrain");
+        noNewLine=false;
+        stitchingRunning=false;
+        bubblePreprocessingRunning=false;
+        correctSegmentationRunning=false;
+        correctSegmentationRunning2=false;
+        processRunning=true;
 
-        if (!detachedCheckBox->isChecked())
-        {
-            noNewLine=false;
-            stitchingRunning=false;
-            bubblePreprocessingRunning=false;
-            correctSegmentationRunning=false;
-            correctSegmentationRunning2=false;
-            testNr = 0;
-            processRunning=true;
-
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../IceGrain/IceGrain", args);
-        }
-        else
-        {
-            if (fileExists(exPath.toStdString().c_str()))
-                process.startDetached(exPath, args);
-            else process.startDetached("./../IceGrain/IceGrain", args);
-        }
+        process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2983,29 +2719,14 @@ void ProcessDialog::analyze()
             minBubbleDistanceBox->text() << parametersFileName << screenshotsDirectoryName2 << "0" << "0" << "0" << "0"<<
             segmentationDirectoryName << suff;
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/IceGrain");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../IceGrain/IceGrain", args);
-    }
+    process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::plotParam()
@@ -3027,29 +2748,14 @@ void ProcessDialog::plotParam()
         minBubbleDistanceBox->text() << parametersFileName << screenshotsDirectoryName2 << "1" << combo1 <<
         paramSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/IceGrain");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../IceGrain/IceGrain", args);
-    }
+    process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::listParam()
@@ -3071,29 +2777,14 @@ void ProcessDialog::listParam()
         minBubbleDistanceBox->text() << parametersFileName << screenshotsDirectoryName2 << "3" << combo1 <<
         paramSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/IceGrain");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../IceGrain/IceGrain", args);
-    }
+    process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::plotCorrelation()
@@ -3115,29 +2806,14 @@ void ProcessDialog::plotCorrelation()
         minBubbleDistanceBox->text() << parametersFileName << screenshotsDirectoryName2 << "2" << combo1 <<
         corrSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/IceGrain");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../IceGrain/IceGrain", args);
-    }
+    process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::newProfiles()
@@ -3154,29 +2830,14 @@ void ProcessDialog::newProfiles()
             minBubbleDistanceBox->text() << parametersFileName << suff << highGrainSizeBox->text() << grainSizeStepBox->text() <<
             depthBinWidthBox->text();
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/IceGrain");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../IceGrain/IceGrain", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../IceGrain/IceGrain", args);
-    }
+    process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::loadSegmHDF5()
@@ -3200,15 +2861,9 @@ void ProcessDialog::loadSegmHDF5()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        testNr = 0;
         processRunning=true;
 
-        QString exPath = QApplication::applicationDirPath();
-        exPath.append("/cis");
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../CIS/cis", args);
+        process.start("/home/ollie/tbinder/scripts/cis.sh", args);
     }
 }
 
@@ -3220,29 +2875,14 @@ void ProcessDialog::elleExportImage()
     QStringList args;
     args << "-elle-export" << elleDataSetFileName << elleExportDirectoryName << elleXBox->text() << elleYBox->text();
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/cis");
+    noNewLine=false;
+    stitchingRunning=false;
+    bubblePreprocessingRunning=false;
+    correctSegmentationRunning=false;
+    correctSegmentationRunning2=false;
+    processRunning=true;
 
-    if (!detachedCheckBox->isChecked())
-    {
-        noNewLine=false;
-        stitchingRunning=false;
-        bubblePreprocessingRunning=false;
-        correctSegmentationRunning=false;
-        correctSegmentationRunning2=false;
-        testNr = 0;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath, args);
-        else process.start("./../CIS/cis", args);
-    }
-    else
-    {
-        if (fileExists(exPath.toStdString().c_str()))
-            process.startDetached(exPath, args);
-        else process.startDetached("./../CIS/cis", args);
-    }
+    process.start("/home/ollie/tbinder/scripts/cis.sh", args);
 }
 
 /***************
@@ -3252,7 +2892,7 @@ Process handling
 //Process standard output during runtime
 void ProcessDialog::readProcessStdout()
 {
-    if (noNewLine && testNr==0)//if last output has not ended with new line, assume carriage return
+    if (noNewLine)//if last output has not ended with new line, assume carriage return
     {
         outputTextEdit->moveCursor( QTextCursor::End, QTextCursor::MoveAnchor );
         outputTextEdit->moveCursor( QTextCursor::StartOfLine, QTextCursor::MoveAnchor );
@@ -3315,16 +2955,12 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         processRunning=false;
-        if (testNr==0)
-        {
-            outputTextEdit->append(tr("Process crashed or killed by user."));
-            QTextCursor c =  outputTextEdit->textCursor();
-            c.movePosition(QTextCursor::End);
-            outputTextEdit->setTextCursor(c);
-            outputTextEdit->ensureCursorVisible();
-        }
-        else write("failed\n",false);
-        testNr = 0;
+
+        outputTextEdit->append(tr("Process crashed or killed by user."));
+        QTextCursor c =  outputTextEdit->textCursor();
+        c.movePosition(QTextCursor::End);
+        outputTextEdit->setTextCursor(c);
+        outputTextEdit->ensureCursorVisible();
     }
     else if (exitCode != 0)
     {
@@ -3332,16 +2968,12 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         processRunning=false;
-        if (testNr==0)
-        {
-            outputTextEdit->append(tr("Process failed."));
-            QTextCursor c =  outputTextEdit->textCursor();
-            c.movePosition(QTextCursor::End);
-            outputTextEdit->setTextCursor(c);
-            outputTextEdit->ensureCursorVisible();
-        }
-        else write("failed\n",false);
-        testNr = 0;
+
+        outputTextEdit->append(tr("Process failed."));
+        QTextCursor c =  outputTextEdit->textCursor();
+        c.movePosition(QTextCursor::End);
+        outputTextEdit->setTextCursor(c);
+        outputTextEdit->ensureCursorVisible();
     }
     else
     {
@@ -3351,13 +2983,8 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             QStringList args;
             args << batchListFileName << mosaicDirectoryName << relativeDirectoryName << stitchedDirectoryName;
 
-            QString exPath = QApplication::applicationDirPath();
-            exPath.append("/IceView");
-
             stitchingRunning=false;   
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../IceView/IceView", args);
+            process.start("./../IceView/IceView", args);
         }
         //Calculate cgp structure after interactive manipulation of ws region image
         else if(correctSegmentationRunning2)
@@ -3372,14 +2999,10 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             QStringList args;
             args << "-cgp-structure" << segFileName << segDirName;
 
-            QString exPath = QApplication::applicationDirPath();
-            exPath.append("/cis");
-
             correctSegmentationRunning2=false;
             correctSegmentationRunning=true;
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../CIS/cis", args);
+
+            process.start("/home/ollie/tbinder/scripts/cis.sh", args);
         }
         //Calculate boundary features after reload of probmap/segmentation
         else if(correctSegmentationRunning)
@@ -3401,13 +3024,9 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             args << "-boundary-features-gui" << selectedImages1 << segmentationDirectoryName << temp <<
                 "pixel-features/" << boundaryFeaturesDirectoryName << parametersFileName << suffix << thumbs;
 
-            QString exPath = QApplication::applicationDirPath();
-            exPath.append("/cis");
-
             correctSegmentationRunning=false;
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../CIS/cis", args);
+
+            process.start("/home/ollie/tbinder/scripts/cis.sh", args);
         }
         //Create a bubble image
         else if (bubblePreprocessingRunning)
@@ -3425,129 +3044,13 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
                 args << "-bubbles-gui" << selectedImages << newPath << parametersFileName << firn;
             }
 
-            QString exPath = QApplication::applicationDirPath();
-            exPath.append("/cis");
-
             bubblePreprocessingRunning=false;
-            if (fileExists(exPath.toStdString().c_str()))
-                process.start(exPath, args);
-            else process.start("./../CIS/cis", args);
-        }
-        else if(testNr > 0)
-        {
-            write("succeeded\n",false);
-            testNr++;
 
-            if(testNr==2)
-            {
-                QString exPath = QApplication::applicationDirPath();
-                exPath.append("/IceView");
-
-                write("Checking IceView... ",false);
-                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../IceView/IceView"))
-                {
-                    if (fileExists(exPath.toStdString().c_str()))
-                        process.start(exPath + " -test");
-                    else process.start("./../IceView/IceView -test");
-                }
-                else
-                {
-                    write("not found\n",false);
-                    processRunning=false;
-                    testNr = 0;
-                }
-            }
-
-            else if(testNr==3)
-            {
-                QString exPath = QApplication::applicationDirPath();
-                exPath.append("/preprocess");
-
-                write("Checking Preprocess... ",false);
-                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../preprocessing/preprocess"))
-                {
-                    if (fileExists(exPath.toStdString().c_str()))
-                        process.start(exPath + " -test");
-                    else process.start("./../preprocessing/preprocess -test");
-                }
-                else
-                {
-                    write("not found\n",false);
-                    processRunning=false;
-                    testNr = 0;
-                }
-            }
-
-            else if(testNr==4)
-            {
-                QString exPath = QApplication::applicationDirPath();
-                exPath.append("/cis");
-
-                write("Checking CIS... ",false);
-                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../CIS/cis"))
-                {
-                    if (fileExists(exPath.toStdString().c_str()))
-                        process.start(exPath + " -test");
-                    else process.start("./../CIS/cis -test");
-                }
-                else
-                {
-                    write("not found\n",false);
-                    processRunning=false;
-                    testNr = 0;
-                }
-            }
-
-            else if(testNr==5)
-            {
-                QString exPath = QApplication::applicationDirPath();
-                exPath.append("/IceGrain");
-
-                write("Checking IceGrain... ",false);
-                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../IceGrain/IceGrain"))
-                {
-                    if (fileExists(exPath.toStdString().c_str()))
-                        process.start(exPath + " -test");
-                    else process.start("./../IceGrain/IceGrain -test");
-                }
-                else
-                {
-                    write("not found\n",false);
-                    processRunning=false;
-                    testNr = 0;
-                }
-            }
-
-            else if(testNr==6)
-            {
-                QString exPath = QApplication::applicationDirPath();
-                exPath.append("/SubGB");
-
-                write("Checking SubGB... ",false);
-                if (fileExists(exPath.toStdString().c_str()) || fileExists("./../SubGB/SubGB"))
-                {
-                    if (fileExists(exPath.toStdString().c_str()))
-                        process.start(exPath + " -test");
-                    else process.start("./../SubGB/SubGB -test");
-                }
-                else
-                {
-                    write("not found\n",false);
-                    processRunning=false;
-                    testNr = 0;
-                }
-            }
-
-            else if(testNr==7)
-            {
-                processRunning=false;
-                testNr = 0;
-            }
+            process.start("/home/ollie/tbinder/scripts/cis.sh", args);
         }
         else
         {
             processRunning=false;
-            testNr = 0;
             outputTextEdit->append(tr("Process succeeded."));
             QTextCursor c =  outputTextEdit->textCursor();
             c.movePosition(QTextCursor::End);
@@ -3566,7 +3069,6 @@ void ProcessDialog::processError(QProcess::ProcessError error)
         stitchingRunning=false;
         correctSegmentationRunning=false;
         processRunning=false;
-        testNr = 0;
         outputTextEdit->append(tr("Process failed to start."));
         QTextCursor c =  outputTextEdit->textCursor();
         c.movePosition(QTextCursor::End);
@@ -4076,19 +3578,6 @@ void ProcessDialog::checkInstallation()
     correctSegmentationRunning = false;
     correctSegmentationRunning2 = false;
 
-    QString exPath = QApplication::applicationDirPath();
-    exPath.append("/IceMatch");
-
     write("",true);
-    write("Checking IceMatch... ",false);
-    if (fileExists(exPath.toStdString().c_str()) || fileExists("./../IceMatch/IceMatch"))
-    {
-        testNr = 1;
-        processRunning=true;
-
-        if (fileExists(exPath.toStdString().c_str()))
-            process.start(exPath + " -test");
-        else process.start("./../IceMatch/IceMatch -test");
-    }
-    else write("not found\n",false);
+    write("Not implemented\n",false);
 }

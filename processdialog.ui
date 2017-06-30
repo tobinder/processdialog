@@ -467,19 +467,6 @@
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="checkInstallationButton">
-     <property name="geometry">
-      <rect>
-       <x>12</x>
-       <y>266</y>
-       <width>151</width>
-       <height>32</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Check installation</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="importElle">
     <attribute name="title">
@@ -2485,22 +2472,6 @@
    </property>
    <property name="text">
     <string>Kill process</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="detachedCheckBox">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>630</y>
-     <width>129</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Start detached</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="suffixLabel">
