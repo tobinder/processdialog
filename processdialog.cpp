@@ -1569,9 +1569,10 @@ void ProcessDialog::stitchImages()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    processRunning=true;
-
-    process.start("./../IceMatch/IceMatch", args);
+    //processRunning=true;
+    write("",true);
+    write("Not implemented\n",false);
+    //process.start("./../IceMatch/IceMatch", args);
 }
 
 void ProcessDialog::preprocessImage()
@@ -1791,12 +1792,19 @@ void ProcessDialog::loadProb()
         disableAll();
 
         QStringList args;
-        QString correctedProbMap = probMapDirectoryName;
-        if (suffix!="no") correctedProbMap.append(suffix);
-        correctedProbMap.append(getFilename(selectedImages1.at(0)));
+        QStringList correctedProbMapsList;
+
+        for(unsigned int l = 0; l < selectedImages1.size(); l++)
+        {
+            QString correctedProbMap = probMapDirectoryName;
+            if (suffix!="no") correctedProbMap.append(suffix);
+            correctedProbMap.append(getFilename(selectedImages1.at(l)));
+            correctedProbMapsList << correctedProbMap;
+        }
+
         QString suffixSegmentationPath = segmentationDirectoryName;
         if (suffix!="no") suffixSegmentationPath.append(suffix);
-        args << "-ws-regions" << correctedProbMap << suffixSegmentationPath;
+        args << "-ws-regions" << correctedProbMapsList << suffixSegmentationPath;
 
         noNewLine=false;
         stitchingRunning=false;
@@ -1892,9 +1900,10 @@ void ProcessDialog::corrSegm()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=true;
-        processRunning=true;
-
-        process.start("./../SubGB/SubGB", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../SubGB/SubGB", args);
     }
 }
 
@@ -1971,9 +1980,10 @@ void ProcessDialog::correctNetwork()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2056,9 +2066,10 @@ void ProcessDialog::findSubgrains()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2192,9 +2203,10 @@ void ProcessDialog::extractNetwork()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2259,9 +2271,10 @@ void ProcessDialog::getParameters()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2308,9 +2321,10 @@ void ProcessDialog::depthProfiles()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    processRunning=true;
-
-    process.start("./../IceGrain/IceGrain", args);
+    //processRunning=true;
+    write("",true);
+    write("Not implemented\n",false);
+    //process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::viewGrains()
@@ -2363,9 +2377,10 @@ void ProcessDialog::viewGrains()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2419,9 +2434,10 @@ void ProcessDialog::viewBoundaries()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2475,9 +2491,10 @@ void ProcessDialog::viewJunctions()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2531,9 +2548,10 @@ void ProcessDialog::analyzeJunctions()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2587,9 +2605,10 @@ void ProcessDialog::grainOverview()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2643,9 +2662,10 @@ void ProcessDialog::boundaryOverview()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2699,9 +2719,10 @@ void ProcessDialog::localCurvature()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        processRunning=true;
-
-        process.start("./../IceGrain/IceGrain", args);
+        //processRunning=true;
+        write("",true);
+        write("Not implemented\n",false);
+        //process.start("./../IceGrain/IceGrain", args);
     }
 }
 
@@ -2724,9 +2745,10 @@ void ProcessDialog::analyze()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    processRunning=true;
-
-    process.start("./../IceGrain/IceGrain", args);
+    //processRunning=true;
+    write("",true);
+    write("Not implemented\n",false);
+    //process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::plotParam()
@@ -2753,9 +2775,10 @@ void ProcessDialog::plotParam()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    processRunning=true;
-
-    process.start("./../IceGrain/IceGrain", args);
+    //processRunning=true;
+    write("",true);
+    write("Not implemented\n",false);
+    //process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::listParam()
@@ -2782,9 +2805,10 @@ void ProcessDialog::listParam()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    processRunning=true;
-
-    process.start("./../IceGrain/IceGrain", args);
+    //processRunning=true;
+    write("",true);
+    write("Not implemented\n",false);
+    //process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::plotCorrelation()
@@ -2811,9 +2835,10 @@ void ProcessDialog::plotCorrelation()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    processRunning=true;
-
-    process.start("./../IceGrain/IceGrain", args);
+    //processRunning=true;
+    write("",true);
+    write("Not implemented\n",false);
+    //process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::newProfiles()
@@ -2835,9 +2860,10 @@ void ProcessDialog::newProfiles()
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    processRunning=true;
-
-    process.start("./../IceGrain/IceGrain", args);
+    //processRunning=true;
+    write("",true);
+    write("Not implemented\n",false);
+    //process.start("./../IceGrain/IceGrain", args);
 }
 
 void ProcessDialog::loadSegmHDF5()
@@ -2984,7 +3010,8 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             args << batchListFileName << mosaicDirectoryName << relativeDirectoryName << stitchedDirectoryName;
 
             stitchingRunning=false;   
-            process.start("./../IceView/IceView", args);
+            write("\nAfter that, IceView is required. Not implemented yet.\n",false);
+            //process.start("./../IceView/IceView", args);
         }
         //Calculate cgp structure after interactive manipulation of ws region image
         else if(correctSegmentationRunning2)
@@ -3002,7 +3029,8 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
             correctSegmentationRunning2=false;
             correctSegmentationRunning=true;
 
-            process.start("/home/ollie/tbinder/scripts/cis.sh", args);
+            write("\nAfter that, cis -cgp-structure is required. Not implemented yet.\n",false);
+            //process.start("/home/ollie/tbinder/scripts/cis.sh", args);
         }
         //Calculate boundary features after reload of probmap/segmentation
         else if(correctSegmentationRunning)
@@ -3026,7 +3054,8 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
 
             correctSegmentationRunning=false;
 
-            process.start("/home/ollie/tbinder/scripts/cis.sh", args);
+            write("\nAfter that, cis -boundary-features-gui is required. Not implemented yet.\n",false);
+            //process.start("/home/ollie/tbinder/scripts/cis.sh", args);
         }
         //Create a bubble image
         else if (bubblePreprocessingRunning)
@@ -3046,9 +3075,10 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
 
             bubblePreprocessingRunning=false;
 
-            process.start("/home/ollie/tbinder/scripts/cis.sh", args);
+            write("\nAfter that, cis -bubbles-gui is required. Not implemented yet.\n",false);
+            //process.start("/home/ollie/tbinder/scripts/cis.sh", args);
         }
-        else
+        //else
         {
             processRunning=false;
             outputTextEdit->append(tr("Process succeeded."));
