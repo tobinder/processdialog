@@ -212,7 +212,6 @@ private:
     QString elleDataSetFileName;
     QString elleExportDirectoryName;
 
-    bool stitchingRunning;
     bool bubblePreprocessingRunning;
     bool correctSegmentationRunning;
     bool correctSegmentationRunning2;

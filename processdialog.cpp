@@ -1562,17 +1562,15 @@ void ProcessDialog::stitchImages()
     outputTextEdit->clear();
 
     QStringList args;
-    args << batchListFileName << mosaicDirectoryName << relativeDirectoryName << parametersFileName;
+    args << batchListFileName << mosaicDirectoryName << relativeDirectoryName << parametersFileName << stitchedDirectoryName;
 
     noNewLine=false;
-    stitchingRunning=true;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
-    //processRunning=true;
-    write("",true);
-    write("Not implemented\n",false);
-    //process.start("./../IceMatch/IceMatch", args);
+    processRunning=true;
+
+    process.start("/home/ollie/tbinder/scripts/IceMatch.sh", args);
 }
 
 void ProcessDialog::preprocessImage()
@@ -1594,7 +1592,6 @@ void ProcessDialog::preprocessImage()
     }
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -1622,7 +1619,6 @@ void ProcessDialog::preprocessImage2()
     }
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=true;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -1650,7 +1646,6 @@ void ProcessDialog::createThumbs()
     }
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -1678,7 +1673,6 @@ void ProcessDialog::reduceThumbs()
     }
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -1751,7 +1745,6 @@ void ProcessDialog::segmentImage()
             segmentationDirectoryName << boundaryFeaturesDirectoryName << selectedImages1 << parametersFileName << suffix << thumbs;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -1807,7 +1800,6 @@ void ProcessDialog::loadProb()
         args << "-ws-regions" << correctedProbMapsList << suffixSegmentationPath;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=true;
         correctSegmentationRunning2=false;
@@ -1846,7 +1838,6 @@ void ProcessDialog::loadSegm()
         args << "-ws-manual" << selectedImages1 << segmentationDirectoryName << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=true;
         correctSegmentationRunning2=false;
@@ -1896,7 +1887,6 @@ void ProcessDialog::corrSegm()
         args << "-correct_seg" << imageDirectoryName << correctedSegmentationImage << correctedProbMap << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=true;
@@ -1976,7 +1966,6 @@ void ProcessDialog::correctNetwork()
         }
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2062,7 +2051,6 @@ void ProcessDialog::findSubgrains()
              << predictionSubGBDirectoryName << profilesDirectoryName;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2199,7 +2187,6 @@ void ProcessDialog::extractNetwork()
         }
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2267,7 +2254,6 @@ void ProcessDialog::getParameters()
         }
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2317,7 +2303,6 @@ void ProcessDialog::depthProfiles()
     if (!directoryExists(subFolder.toAscii().data())) dir.mkdir("step");
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -2373,7 +2358,6 @@ void ProcessDialog::viewGrains()
             "0" << startValue << parametersFileName << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2430,7 +2414,6 @@ void ProcessDialog::viewBoundaries()
             "1" << startValue << parametersFileName << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2487,7 +2470,6 @@ void ProcessDialog::viewJunctions()
             "2" << startValue << parametersFileName << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2544,7 +2526,6 @@ void ProcessDialog::analyzeJunctions()
             "3" << startValue << parametersFileName << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2601,7 +2582,6 @@ void ProcessDialog::grainOverview()
             "4" << startValue << parametersFileName << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2658,7 +2638,6 @@ void ProcessDialog::boundaryOverview()
             "9" << startValue << parametersFileName << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2715,7 +2694,6 @@ void ProcessDialog::localCurvature()
             "6" << startValue << parametersFileName << suffix;
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2741,7 +2719,6 @@ void ProcessDialog::analyze()
             segmentationDirectoryName << suff;
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -2771,7 +2748,6 @@ void ProcessDialog::plotParam()
         paramSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -2801,7 +2777,6 @@ void ProcessDialog::listParam()
         paramSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -2831,7 +2806,6 @@ void ProcessDialog::plotCorrelation()
         corrSpinBox->text() << combo2 << segmentationDirectoryName << suff;
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -2856,7 +2830,6 @@ void ProcessDialog::newProfiles()
             depthBinWidthBox->text();
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -2883,7 +2856,6 @@ void ProcessDialog::loadSegmHDF5()
                 "pixel-features/" << boundaryFeaturesDirectoryName << parametersFileName << "no" << "no";
 
         noNewLine=false;
-        stitchingRunning=false;
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
@@ -2902,7 +2874,6 @@ void ProcessDialog::elleExportImage()
     args << "-elle-export" << elleDataSetFileName << elleExportDirectoryName << elleXBox->text() << elleYBox->text();
 
     noNewLine=false;
-    stitchingRunning=false;
     bubblePreprocessingRunning=false;
     correctSegmentationRunning=false;
     correctSegmentationRunning2=false;
@@ -2977,7 +2948,6 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
 {
     if (exitStatus == QProcess::CrashExit)
     {
-        stitchingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         processRunning=false;
@@ -2990,7 +2960,6 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
     }
     else if (exitCode != 0)
     {
-        stitchingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
         processRunning=false;
@@ -3003,16 +2972,6 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
     }
     else
     {
-        //Start IceView if IceMatch succeeded.
-        if(stitchingRunning)
-        {
-            QStringList args;
-            args << batchListFileName << mosaicDirectoryName << relativeDirectoryName << stitchedDirectoryName;
-
-            stitchingRunning=false;   
-            write("\nAfter that, IceView is required. Not implemented yet.\n",false);
-            //process.start("./../IceView/IceView", args);
-        }
         //Calculate cgp structure after interactive manipulation of ws region image
         else if(correctSegmentationRunning2)
         {
@@ -3096,7 +3055,6 @@ void ProcessDialog::processError(QProcess::ProcessError error)
 {
     if (error == QProcess::FailedToStart)
     {
-        stitchingRunning=false;
         correctSegmentationRunning=false;
         processRunning=false;
         outputTextEdit->append(tr("Process failed to start."));
@@ -3603,7 +3561,6 @@ void ProcessDialog::write(QByteArray newText, bool clear)
 //Check executables
 void ProcessDialog::checkInstallation()
 {
-    stitchingRunning = false;
     bubblePreprocessingRunning = false;
     correctSegmentationRunning = false;
     correctSegmentationRunning2 = false;
