@@ -2973,7 +2973,7 @@ void ProcessDialog::processFinished(int exitCode, QProcess::ExitStatus exitStatu
     else
     {
         //Calculate cgp structure after interactive manipulation of ws region image
-        else if(correctSegmentationRunning2)
+        if(correctSegmentationRunning2)
         {
             QString segDirName = segmentationDirectoryName;
             if (!thumbsCheckBox->isChecked()) segDirName.append(thumbsDirectoryName);
