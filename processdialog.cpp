@@ -2190,10 +2190,9 @@ void ProcessDialog::extractNetwork()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        //processRunning=true;
-        write("",true);
-        write("Not implemented\n",false);
-        //process.start("./../IceGrain/IceGrain", args);
+        processRunning=true;
+
+        process.start("/home/ollie/tbinder/scripts/IceGrain.sh", args);
     }
 }
 
