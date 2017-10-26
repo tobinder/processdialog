@@ -1348,10 +1348,10 @@ void ProcessDialog::checkPathesSet()
     {
         depthProfilesButton->setEnabled(true);
     }
-    if (!parametersFileName.isEmpty())
-    {
-        labelButton->setEnabled(true);
-    }
+    //if (!parametersFileName.isEmpty())
+    //{
+    //    labelButton->setEnabled(true);
+    //}
     if (!imageDirectoryName.isEmpty() && !selectedImage3.isEmpty() && !processRunning && !segmentationDirectoryName.isEmpty() &&
         !screenshotsDirectoryName.isEmpty() && !profilesDirectoryName.isEmpty() && !boundaryFeaturesDirectoryName.isEmpty() &&
         !parametersFileName.isEmpty())
@@ -1377,7 +1377,7 @@ void ProcessDialog::checkPathesSet()
     {
         analyzeStartButton_2->setEnabled(true);
     }
-    if (true) plotsButton->setEnabled(true);
+    //if (true) plotsButton->setEnabled(true);
     if (!elleDataSetFileName.isEmpty() && !elleExportDirectoryName.isEmpty() && !processRunning)
     {
         elleExportButton->setEnabled(true);
@@ -2256,10 +2256,9 @@ void ProcessDialog::getParameters()
         bubblePreprocessingRunning=false;
         correctSegmentationRunning=false;
         correctSegmentationRunning2=false;
-        //processRunning=true;
-        write("",true);
-        write("Not implemented\n",false);
-        //process.start("./../IceGrain/IceGrain", args);
+        processRunning=true;
+
+        process.start("/home/ollie/tbinder/scripts/IceGrain.sh", args);
     }
 }
 
